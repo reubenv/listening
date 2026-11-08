@@ -12,7 +12,7 @@
 :root[data-theme="dark"]{
  --bg:#141816;--card:#1c211f;--ink:#e6ebe8;--muted:#a1ada7;--line:#2f3733;
  --accent:#7cc4ad;--on-accent:#0f201a;--accent-soft:#1e3830;--warn:#e0b25a;--field:#141816;color-scheme:dark}
-*{box-sizing:border-box}
+*{box-sizing:border-box} [hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 var(--ui)}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
 main{max-width:720px;margin:0 auto;padding-block:20px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
@@ -56,10 +56,48 @@ details{margin-top:10px} summary{cursor:pointer;color:var(--accent)}
 #backupText{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.75rem;min-height:90px}
 .print-only{display:none}
 .page{break-before:page}
+.t .tx{flex:1}
+.hear{flex:none;align-self:center;border:1px solid var(--line);color:var(--muted);padding:4px 8px;font-size:.8rem}
+.views{display:inline-flex;border:1px solid var(--accent);border-radius:9px;overflow:hidden}
+.views button{border:0;border-radius:0;padding:8px 16px}
+.views button[aria-pressed=true]{background:var(--accent);color:var(--on-accent)}
+button.primary{background:var(--accent);color:var(--on-accent);font-weight:600}
+#startCard{display:grid;gap:4px;margin-bottom:12px}
+.startedrow{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+#resetBtn{padding:4px 10px;font-size:.85rem} #startCard .note{margin:0} #startBtn{padding:12px}
+.hint{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--accent-soft);border-radius:10px;padding:8px 12px;margin:0 0 12px;font-size:.92rem}
+.seg{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;min-height:42vh;display:flex;flex-direction:column;gap:8px}
+.seg h2{margin:0;font-family:var(--phrase);font-size:1.45rem;line-height:1.2}
+.segmeta{color:var(--muted);font-size:.85rem;font-variant-numeric:tabular-nums}
+.seg .t.mainp{border:1px solid var(--line);padding:12px}
+.seg .t.mainp .pt{font-size:1.65rem}
+.more summary{color:var(--accent);cursor:pointer;padding:6px 0}
+.calm{color:var(--muted);font-size:1.05rem;margin:8px 0}
+.wrap .big{font-size:1.3rem;margin:8px 0}
+.feel button[aria-pressed=true]{background:var(--accent);color:var(--on-accent)}
+.here{align-self:flex-start;margin-top:auto;border-style:dashed}
+.fnav{display:grid;grid-template-columns:1fr 1.5fr 1fr;gap:8px;margin:12px 0}
+.fnav button{padding:14px 6px}
+.dots{display:flex;gap:1px;flex-wrap:wrap;justify-content:center;margin:4px 0 12px}
+.dot{width:25px;height:28px;border:0;padding:0;display:grid;place-items:center;background:transparent}
+.dot::after{content:"";width:11px;height:11px;border-radius:50%;border:2px solid var(--accent)}
+.dot.done::after{background:var(--accent)}
+.dot.cur::after{width:15px;height:15px;box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--ink)}
+.setting{color:var(--muted);font-size:.9rem}
+.setting button[aria-pressed=true]{background:var(--accent);color:var(--on-accent)}
+.prep{margin:10px 0} .prep summary{color:var(--accent);cursor:pointer}
+.pgroup{margin-top:12px} .pgroup .segmeta{font-weight:600}
+.prow{display:grid;grid-template-columns:1fr auto;gap:6px 8px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.prow .ph{display:flex;flex-direction:column;min-width:0} .prow .ph b{font-family:var(--phrase);font-size:1.15rem}
+.prow input{grid-column:1/-1} .prow .chk{grid-column:1/-1;display:flex;gap:8px;align-items:center;min-height:1.6em}
+.ans2{color:var(--accent);font-size:.92rem}
+.mainonly .prow[data-main='0']{display:none}
+.mean .yours{color:var(--muted);font-size:.9rem;font-style:italic}
+.showm{padding:3px 10px;font-size:.82rem;margin:4px 0}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 @media print{
  html{font-size:10.5px} body{background:#fff;color:#000;font-size:10.5px} main{padding:0;max-width:none}
- .bar,.no-print,button,details{display:none!important} .print-only{display:block}
+ .bar,.no-print,button,details,.views,#focusView{display:none!important} #sheetView{display:block!important} .print-only{display:block}
  h1{font-size:16px} h2{font-size:13px;margin:10px 0 4px} .sub{margin-bottom:6px}
  .card{padding:4px 10px} .how ol{margin:2px 0}
  .parts{columns:2;column-gap:12px} .part{padding:6px 8px;margin:0 0 8px;border-color:#bbb}
@@ -69,27 +107,167 @@ details{margin-top:10px} summary{cursor:pointer;color:var(--accent)}
  .part textarea,.ans{display:none!important} td{padding:3px 4px} .grid2{display:grid;grid-template-columns:1fr 1fr;column-gap:24px}
 }
 </style></head><body><main><h1>Listening cue sheet</h1><p class='sub'>Midweek meeting · Wednesday, November 11 · 9–15 de novembro · Jeremias 51–52</p>
+<div class='views' role='group' aria-label='View'><button type='button' data-view='focus' aria-pressed='true'>Focus</button><button type='button' data-view='sheet'>Full sheet</button></div>
+<div class='bar' role='status'><span>Phrases caught <b class='caught'>0</b></span><small id='status'></small></div>
+<div id='focusView'>
+<details class='card prep' id='prepBox'><summary>Before the meeting</summary><p class='note'>For each phrase, write what you think it means, then check. Say it out loud once; tap ▶ Hear if it shows to hear it spoken. Blanks are fine.</p>
+<div class='pgroup'><div class='segmeta'>Learn from the warning example of Zedekiah</div>
+<div class='prow' data-main='0'><div class='ph'><b lang='pt-BR'>Zedequias</b><span class='say'>zeh-deh-KEE-ahs</span></div><button class='hear' type='button' data-say='Zedequias' aria-label='Hear Zedequias' hidden>▶ Hear</button><input type='text' id='mean-p1t0' data-field='mean-p1t0' data-mid='p1t0' placeholder='What does it mean?' aria-label='What does Zedequias mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p1t0' hidden>Meaning: Zedekiah</span><button class='showm' type='button' data-mid='p1t0'>Check</button></div></div>
+<div class='prow' data-main='0'><div class='ph'><b lang='pt-BR'>rei de Babilônia</b><span class='say'>hay djee bah-bee-LOH-nya</span></div><button class='hear' type='button' data-say='rei de Babilônia' aria-label='Hear rei de Babilônia' hidden>▶ Hear</button><input type='text' id='mean-p1t1' data-field='mean-p1t1' data-mid='p1t1' placeholder='What does it mean?' aria-label='What does rei de Babilônia mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p1t1' hidden>Meaning: king of Babylon</span><button class='showm' type='button' data-mid='p1t1'>Check</button></div></div>
+<div class='prow' data-main='1'><div class='ph'><b lang='pt-BR'>juramento</b><span class='say'>zhoo-rah-MEN-too</span></div><button class='hear' type='button' data-say='juramento' aria-label='Hear juramento' hidden>▶ Hear</button><input type='text' id='mean-p1t2' data-field='mean-p1t2' data-mid='p1t2' placeholder='What does it mean?' aria-label='What does juramento mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p1t2' hidden>Meaning: oath · jurou = he swore</span><button class='showm' type='button' data-mid='p1t2'>Check</button></div></div>
+<div class='prow' data-main='0'><div class='ph'><b lang='pt-BR'>cumprir</b><span class='say'>koom-PREER</span></div><button class='hear' type='button' data-say='cumprir' aria-label='Hear cumprir' hidden>▶ Hear</button><input type='text' id='mean-p1t3' data-field='mean-p1t3' data-mid='p1t3' placeholder='What does it mean?' aria-label='What does cumprir mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p1t3' hidden>Meaning: to keep / fulfill (a promise)</span><button class='showm' type='button' data-mid='p1t3'>Check</button></div></div>
+<div class='prow' data-main='0'><div class='ph'><b lang='pt-BR'>levar a sério</b><span class='say'>leh-VAR ah SEH-ryoo</span></div><button class='hear' type='button' data-say='levar a sério' aria-label='Hear levar a sério' hidden>▶ Hear</button><input type='text' id='mean-p1t4' data-field='mean-p1t4' data-mid='p1t4' placeholder='What does it mean?' aria-label='What does levar a sério mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p1t4' hidden>Meaning: to take seriously</span><button class='showm' type='button' data-mid='p1t4'>Check</button></div></div>
+</div>
+<div class='pgroup'><div class='segmeta'>Spiritual gems</div>
+<div class='prow' data-main='0'><div class='ph'><b lang='pt-BR'>Fujam do meio de Babilônia</b><span class='say'>FOO-zhown doo MAY-oo djee bah-bee-LOH-nya</span></div><button class='hear' type='button' data-say='Fujam do meio de Babilônia' aria-label='Hear Fujam do meio de Babilônia' hidden>▶ Hear</button><input type='text' id='mean-p2t0' data-field='mean-p2t0' data-mid='p2t0' placeholder='What does it mean?' aria-label='What does Fujam do meio de Babilônia mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p2t0' hidden>Meaning: Flee out of the midst of Babylon</span><button class='showm' type='button' data-mid='p2t0'>Check</button></div></div>
+<div class='prow' data-main='0'><div class='ph'><b lang='pt-BR'>vingança</b><span class='say'>veen-GAN-sah</span></div><button class='hear' type='button' data-say='vingança' aria-label='Hear vingança' hidden>▶ Hear</button><input type='text' id='mean-p2t1' data-field='mean-p2t1' data-mid='p2t1' placeholder='What does it mean?' aria-label='What does vingança mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p2t1' hidden>Meaning: vengeance</span><button class='showm' type='button' data-mid='p2t1'>Check</button></div></div>
+<div class='prow' data-main='0'><div class='ph'><b lang='pt-BR'>mensagem</b><span class='say'>men-SAH-zhen</span></div><button class='hear' type='button' data-say='mensagem' aria-label='Hear mensagem' hidden>▶ Hear</button><input type='text' id='mean-p2t2' data-field='mean-p2t2' data-mid='p2t2' placeholder='What does it mean?' aria-label='What does mensagem mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p2t2' hidden>Meaning: message</span><button class='showm' type='button' data-mid='p2t2'>Check</button></div></div>
+<div class='prow' data-main='1'><div class='ph'><b lang='pt-BR'>joias espirituais</b><span class='say'>ZHOY-ahs es-pee-ree-too-AISS</span></div><button class='hear' type='button' data-say='joias espirituais' aria-label='Hear joias espirituais' hidden>▶ Hear</button><input type='text' id='mean-p2t3' data-field='mean-p2t3' data-mid='p2t3' placeholder='What does it mean?' aria-label='What does joias espirituais mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p2t3' hidden>Meaning: spiritual gems</span><button class='showm' type='button' data-mid='p2t3'>Check</button></div></div>
+</div>
+<div class='pgroup'><div class='segmeta'>Starting a conversation</div>
+<div class='prow' data-main='1'><div class='ph'><b lang='pt-BR'>estudo bíblico</b><span class='say'>es-TOO-doo BEE-blee-koo</span></div><button class='hear' type='button' data-say='estudo bíblico' aria-label='Hear estudo bíblico' hidden>▶ Hear</button><input type='text' id='mean-p4t0' data-field='mean-p4t0' data-mid='p4t0' placeholder='What does it mean?' aria-label='What does estudo bíblico mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p4t0' hidden>Meaning: Bible study</span><button class='showm' type='button' data-mid='p4t0'>Check</button></div></div>
+<div class='prow' data-main='0'><div class='ph'><b lang='pt-BR'>de casa em casa</b><span class='say'>djee KAH-zah en KAH-zah</span></div><button class='hear' type='button' data-say='de casa em casa' aria-label='Hear de casa em casa' hidden>▶ Hear</button><input type='text' id='mean-p4t1' data-field='mean-p4t1' data-mid='p4t1' placeholder='What does it mean?' aria-label='What does de casa em casa mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p4t1' hidden>Meaning: house to house</span><button class='showm' type='button' data-mid='p4t1'>Check</button></div></div>
+<div class='prow' data-main='0'><div class='ph'><b lang='pt-BR'>Bom dia / Boa noite</b><span class='say'>bohn DJEE-ah / BOH-ah NOY-chee</span></div><button class='hear' type='button' data-say='Bom dia / Boa noite' aria-label='Hear Bom dia / Boa noite' hidden>▶ Hear</button><input type='text' id='mean-p4t2' data-field='mean-p4t2' data-mid='p4t2' placeholder='What does it mean?' aria-label='What does Bom dia / Boa noite mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p4t2' hidden>Meaning: Good morning / Good evening</span><button class='showm' type='button' data-mid='p4t2'>Check</button></div></div>
+</div>
+<div class='pgroup'><div class='segmeta'>Starting a conversation</div>
+<div class='prow' data-main='1'><div class='ph'><b lang='pt-BR'>Filho de Deus</b><span class='say'>FEE-lyoo djee DAY-oos</span></div><button class='hear' type='button' data-say='Filho de Deus' aria-label='Hear Filho de Deus' hidden>▶ Hear</button><input type='text' id='mean-p5t0' data-field='mean-p5t0' data-mid='p5t0' placeholder='What does it mean?' aria-label='What does Filho de Deus mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p5t0' hidden>Meaning: Son of God</span><button class='showm' type='button' data-mid='p5t0'>Check</button></div></div>
+<div class='prow' data-main='0'><div class='ph'><b lang='pt-BR'>não concorda</b><span class='say'>nown kon-KOR-dah</span></div><button class='hear' type='button' data-say='não concorda' aria-label='Hear não concorda' hidden>▶ Hear</button><input type='text' id='mean-p5t1' data-field='mean-p5t1' data-mid='p5t1' placeholder='What does it mean?' aria-label='What does não concorda mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p5t1' hidden>Meaning: doesn&#x27;t agree</span><button class='showm' type='button' data-mid='p5t1'>Check</button></div></div>
+</div>
+<div class='pgroup'><div class='segmeta'>Talk</div>
+<div class='prow' data-main='1'><div class='ph'><b lang='pt-BR'>Reino de Deus</b><span class='say'>HAY-noo djee DAY-oos</span></div><button class='hear' type='button' data-say='Reino de Deus' aria-label='Hear Reino de Deus' hidden>▶ Hear</button><input type='text' id='mean-p6t0' data-field='mean-p6t0' data-mid='p6t0' placeholder='What does it mean?' aria-label='What does Reino de Deus mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p6t0' hidden>Meaning: God&#x27;s Kingdom</span><button class='showm' type='button' data-mid='p6t0'>Check</button></div></div>
+<div class='prow' data-main='0'><div class='ph'><b lang='pt-BR'>governo</b><span class='say'>go-VEHR-noo</span></div><button class='hear' type='button' data-say='governo' aria-label='Hear governo' hidden>▶ Hear</button><input type='text' id='mean-p6t1' data-field='mean-p6t1' data-mid='p6t1' placeholder='What does it mean?' aria-label='What does governo mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p6t1' hidden>Meaning: government</span><button class='showm' type='button' data-mid='p6t1'>Check</button></div></div>
+<div class='prow' data-main='0'><div class='ph'><b lang='pt-BR'>no céu</b><span class='say'>noo SEH-oo</span></div><button class='hear' type='button' data-say='no céu' aria-label='Hear no céu' hidden>▶ Hear</button><input type='text' id='mean-p6t2' data-field='mean-p6t2' data-mid='p6t2' placeholder='What does it mean?' aria-label='What does no céu mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p6t2' hidden>Meaning: in heaven</span><button class='showm' type='button' data-mid='p6t2'>Check</button></div></div>
+</div>
+<div class='pgroup'><div class='segmeta'>Our donations glorify God&#x27;s beautiful name</div>
+<div class='prow' data-main='1'><div class='ph'><b lang='pt-BR'>donativos</b><span class='say'>doh-nah-CHEE-voos</span></div><button class='hear' type='button' data-say='donativos' aria-label='Hear donativos' hidden>▶ Hear</button><input type='text' id='mean-p7t0' data-field='mean-p7t0' data-mid='p7t0' placeholder='What does it mean?' aria-label='What does donativos mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p7t0' hidden>Meaning: donations</span><button class='showm' type='button' data-mid='p7t0'>Check</button></div></div>
+<div class='prow' data-main='0'><div class='ph'><b lang='pt-BR'>dar glória</b><span class='say'>dar GLOH-ree-ah</span></div><button class='hear' type='button' data-say='dar glória' aria-label='Hear dar glória' hidden>▶ Hear</button><input type='text' id='mean-p7t1' data-field='mean-p7t1' data-mid='p7t1' placeholder='What does it mean?' aria-label='What does dar glória mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p7t1' hidden>Meaning: to give glory</span><button class='showm' type='button' data-mid='p7t1'>Check</button></div></div>
+<div class='prow' data-main='0'><div class='ph'><b lang='pt-BR'>projetos da organização</b><span class='say'>pro-ZHEH-toos dah or-gah-nee-zah-SOWN</span></div><button class='hear' type='button' data-say='projetos da organização' aria-label='Hear projetos da organização' hidden>▶ Hear</button><input type='text' id='mean-p7t2' data-field='mean-p7t2' data-mid='p7t2' placeholder='What does it mean?' aria-label='What does projetos da organização mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p7t2' hidden>Meaning: the organization&#x27;s projects</span><button class='showm' type='button' data-mid='p7t2'>Check</button></div></div>
+<div class='prow' data-main='0'><div class='ph'><b lang='pt-BR'>atualizações</b><span class='say'>ah-too-ah-lee-zah-SOINS</span></div><button class='hear' type='button' data-say='atualizações' aria-label='Hear atualizações' hidden>▶ Hear</button><input type='text' id='mean-p7t3' data-field='mean-p7t3' data-mid='p7t3' placeholder='What does it mean?' aria-label='What does atualizações mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p7t3' hidden>Meaning: updates</span><button class='showm' type='button' data-mid='p7t3'>Check</button></div></div>
+</div>
+<div class='pgroup'><div class='segmeta'>Congregation Bible Study · The account</div>
+<div class='prow' data-main='0'><div class='ph'><b lang='pt-BR'>Baraque e Débora</b><span class='say'>bah-RAH-kee ee DEH-boh-rah</span></div><button class='hear' type='button' data-say='Baraque e Débora' aria-label='Hear Baraque e Débora' hidden>▶ Hear</button><input type='text' id='mean-p8t0' data-field='mean-p8t0' data-mid='p8t0' placeholder='What does it mean?' aria-label='What does Baraque e Débora mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p8t0' hidden>Meaning: Barak and Deborah</span><button class='showm' type='button' data-mid='p8t0'>Check</button></div></div>
+<div class='prow' data-main='1'><div class='ph'><b lang='pt-BR'>Certamente irei com você</b><span class='say'>ser-tah-MEN-chee ee-RAY kon voh-SEH</span></div><button class='hear' type='button' data-say='Certamente irei com você' aria-label='Hear Certamente irei com você' hidden>▶ Hear</button><input type='text' id='mean-p8t1' data-field='mean-p8t1' data-mid='p8t1' placeholder='What does it mean?' aria-label='What does Certamente irei com você mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p8t1' hidden>Meaning: I will certainly go with you</span><button class='showm' type='button' data-mid='p8t1'>Check</button></div></div>
+<div class='prow' data-main='0'><div class='ph'><b lang='pt-BR'>carros de guerra</b><span class='say'>KAH-hoos djee GEH-hah</span></div><button class='hear' type='button' data-say='carros de guerra' aria-label='Hear carros de guerra' hidden>▶ Hear</button><input type='text' id='mean-p8t2' data-field='mean-p8t2' data-mid='p8t2' placeholder='What does it mean?' aria-label='What does carros de guerra mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p8t2' hidden>Meaning: war chariots</span><button class='showm' type='button' data-mid='p8t2'>Check</button></div></div>
+<div class='prow' data-main='0'><div class='ph'><b lang='pt-BR'>exército</b><span class='say'>eh-ZEHR-see-too</span></div><button class='hear' type='button' data-say='exército' aria-label='Hear exército' hidden>▶ Hear</button><input type='text' id='mean-p8t3' data-field='mean-p8t3' data-mid='p8t3' placeholder='What does it mean?' aria-label='What does exército mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p8t3' hidden>Meaning: army</span><button class='showm' type='button' data-mid='p8t3'>Check</button></div></div>
+<div class='prow' data-main='0'><div class='ph'><b lang='pt-BR'>profetisa</b><span class='say'>pro-feh-CHEE-zah</span></div><button class='hear' type='button' data-say='profetisa' aria-label='Hear profetisa' hidden>▶ Hear</button><input type='text' id='mean-p8t4' data-field='mean-p8t4' data-mid='p8t4' placeholder='What does it mean?' aria-label='What does profetisa mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p8t4' hidden>Meaning: prophetess</span><button class='showm' type='button' data-mid='p8t4'>Check</button></div></div>
+<div class='prow' data-main='0'><div class='ph'><b lang='pt-BR'>monte Tabor</b><span class='say'>MON-chee tah-BOR</span></div><button class='hear' type='button' data-say='monte Tabor' aria-label='Hear monte Tabor' hidden>▶ Hear</button><input type='text' id='mean-p8t5' data-field='mean-p8t5' data-mid='p8t5' placeholder='What does it mean?' aria-label='What does monte Tabor mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p8t5' hidden>Meaning: Mount Tabor</span><button class='showm' type='button' data-mid='p8t5'>Check</button></div></div>
+</div>
+<div class='pgroup'><div class='segmeta'>Congregation Bible Study · Discussion questions</div>
+<div class='prow' data-main='1'><div class='ph'><b lang='pt-BR'>coragem</b><span class='say'>koh-RAH-zhen</span></div><button class='hear' type='button' data-say='coragem' aria-label='Hear coragem' hidden>▶ Hear</button><input type='text' id='mean-p8t6' data-field='mean-p8t6' data-mid='p8t6' placeholder='What does it mean?' aria-label='What does coragem mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p8t6' hidden>Meaning: courage · corajosa = brave</span><button class='showm' type='button' data-mid='p8t6'>Check</button></div></div>
+<div class='prow' data-main='0'><div class='ph'><b lang='pt-BR'>mãe em Israel</b><span class='say'>mahyn en eez-hah-EW</span></div><button class='hear' type='button' data-say='mãe em Israel' aria-label='Hear mãe em Israel' hidden>▶ Hear</button><input type='text' id='mean-p8t7' data-field='mean-p8t7' data-mid='p8t7' placeholder='What does it mean?' aria-label='What does mãe em Israel mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p8t7' hidden>Meaning: a mother in Israel</span><button class='showm' type='button' data-mid='p8t7'>Check</button></div></div>
+<div class='prow' data-main='0'><div class='ph'><b lang='pt-BR'>as estrelas lutaram</b><span class='say'>ahs es-TREH-lahs loo-TAH-rown</span></div><button class='hear' type='button' data-say='as estrelas lutaram' aria-label='Hear as estrelas lutaram' hidden>▶ Hear</button><input type='text' id='mean-p8t8' data-field='mean-p8t8' data-mid='p8t8' placeholder='What does it mean?' aria-label='What does as estrelas lutaram mean?' autocomplete='off'><div class='chk'><span class='ans2' data-mid='p8t8' hidden>Meaning: the stars fought</span><button class='showm' type='button' data-mid='p8t8'>Check</button></div></div>
+</div>
+</details>
+<div class='card' id='startCard'><button id='startBtn' class='primary' type='button'>Meeting started</button><div id='startedRow' class='startedrow' hidden><p id='startedMsg' class='note'></p><button id='resetBtn' type='button'>Reset</button></div><p class='note' id='whereMsg' aria-live='polite'></p></div>
+<div id='hint' class='hint' hidden><span>Probably on now: <b id='hintLabel'></b></span><button id='hintGo' type='button'>Go there</button></div>
+<section class='seg' data-k='0' hidden><div class='segmeta'>Between parts · about 5 min</div><h2 lang='pt-BR'>Cântico 98 e oração</h2><div class='en'>Song and prayer</div>
+<p class='calm'>Nothing to catch here. Coming up: <b>Learn from the warning example of Zedekiah</b>. Listen for <b lang='pt-BR'>juramento</b><span class='mref' data-mid='p1t2' hidden> (oath)</span>.</p>
+<button class='here' type='button' data-k='0' hidden>We're on this part now</button></section>
+<section class='seg' data-k='1' hidden><div class='segmeta'>Between parts · 1 min</div><h2 lang='pt-BR'>Comentários iniciais</h2><div class='en'>Opening comments</div>
+<p class='calm'>Nothing to catch here. Coming up: <b>Learn from the warning example of Zedekiah</b>. Listen for <b lang='pt-BR'>juramento</b><span class='mref' data-mid='p1t2' hidden> (oath)</span>.</p>
+<button class='here' type='button' data-k='1' hidden>We're on this part now</button></section>
+<section class='seg' data-k='2' hidden><div class='segmeta'>Part 1 of 8 · 10 min</div><h2 lang='pt-BR'>Não siga o exemplo de Zedequias</h2><div class='en'>Learn from the warning example of Zedekiah</div>
+<div class='t mainp' role='checkbox' tabindex='0' aria-checked='false' data-id='p1t2'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>juramento</div><div class='mean' data-mid='p1t2'><div class='yours'></div><div class='en-m' hidden>oath <span class='en'>· jurou = he swore</span></div><button class='showm' type='button' data-mid='p1t2'>Show meaning</button></div><div class='say'>zhoo-rah-MEN-too</div></div><button class='hear' type='button' data-say='juramento' aria-label='Hear juramento' hidden>▶ Hear</button></div>
+<details class='more'><summary>More phrases (4)</summary>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p1t0'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>Zedequias</div><div class='mean' data-mid='p1t0'><div class='yours'></div><div class='en-m' hidden>Zedekiah</div><button class='showm' type='button' data-mid='p1t0'>Show meaning</button></div><div class='say'>zeh-deh-KEE-ahs</div><div class='tip'>You&#x27;ll hear this a lot. A warm-up.</div></div><button class='hear' type='button' data-say='Zedequias' aria-label='Hear Zedequias' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p1t1'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>rei de Babilônia</div><div class='mean' data-mid='p1t1'><div class='yours'></div><div class='en-m' hidden>king of Babylon</div><button class='showm' type='button' data-mid='p1t1'>Show meaning</button></div><div class='say'>hay djee bah-bee-LOH-nya</div></div><button class='hear' type='button' data-say='rei de Babilônia' aria-label='Hear rei de Babilônia' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p1t3'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>cumprir</div><div class='mean' data-mid='p1t3'><div class='yours'></div><div class='en-m' hidden>to keep / fulfill (a promise)</div><button class='showm' type='button' data-mid='p1t3'>Show meaning</button></div><div class='say'>koom-PREER</div></div><button class='hear' type='button' data-say='cumprir' aria-label='Hear cumprir' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p1t4'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>levar a sério</div><div class='mean' data-mid='p1t4'><div class='yours'></div><div class='en-m' hidden>to take seriously</div><button class='showm' type='button' data-mid='p1t4'>Show meaning</button></div><div class='say'>leh-VAR ah SEH-ryoo</div></div><button class='hear' type='button' data-say='levar a sério' aria-label='Hear levar a sério' hidden>▶ Hear</button></div>
+</details>
+<div class='lf'>The closing question: “O que eu tenho que fazer para não ser como Zedequias?” (What do I need to do so I&#x27;m not like Zedekiah?) Catch one word of the answer.</div>
+<button class='here' type='button' data-k='2' hidden>We're on this part now</button></section>
+<section class='seg' data-k='3' hidden><div class='segmeta'>Part 2 of 8 · 10 min</div><h2 lang='pt-BR'>Joias espirituais</h2><div class='en'>Spiritual gems</div>
+<div class='t mainp' role='checkbox' tabindex='0' aria-checked='false' data-id='p2t3'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>joias espirituais</div><div class='mean' data-mid='p2t3'><div class='yours'></div><div class='en-m' hidden>spiritual gems</div><button class='showm' type='button' data-mid='p2t3'>Show meaning</button></div><div class='say'>ZHOY-ahs es-pee-ree-too-AISS</div><div class='tip'>Said when the audience is invited to comment.</div></div><button class='hear' type='button' data-say='joias espirituais' aria-label='Hear joias espirituais' hidden>▶ Hear</button></div>
+<details class='more'><summary>More phrases (3)</summary>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p2t0'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>Fujam do meio de Babilônia</div><div class='mean' data-mid='p2t0'><div class='yours'></div><div class='en-m' hidden>Flee out of the midst of Babylon</div><button class='showm' type='button' data-mid='p2t0'>Show meaning</button></div><div class='say'>FOO-zhown doo MAY-oo djee bah-bee-LOH-nya</div></div><button class='hear' type='button' data-say='Fujam do meio de Babilônia' aria-label='Hear Fujam do meio de Babilônia' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p2t1'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>vingança</div><div class='mean' data-mid='p2t1'><div class='yours'></div><div class='en-m' hidden>vengeance</div><button class='showm' type='button' data-mid='p2t1'>Show meaning</button></div><div class='say'>veen-GAN-sah</div></div><button class='hear' type='button' data-say='vingança' aria-label='Hear vingança' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p2t2'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>mensagem</div><div class='mean' data-mid='p2t2'><div class='yours'></div><div class='en-m' hidden>message</div><button class='showm' type='button' data-mid='p2t2'>Show meaning</button></div><div class='say'>men-SAH-zhen</div></div><button class='hear' type='button' data-say='mensagem' aria-label='Hear mensagem' hidden>▶ Hear</button></div>
+</details>
+<button class='here' type='button' data-k='3' hidden>We're on this part now</button></section>
+<section class='seg' data-k='4' hidden><div class='segmeta'>Part 3 of 8 · 4 min</div><h2 lang='pt-BR'>Leitura da Bíblia</h2><div class='en'>Bible reading</div>
+<div class='lf'>Prep, not a target list: read or listen to Jeremias 52:6-20 in Portuguese in JW Library before Wednesday. Then just follow along.</div>
+<p class='calm'>Nothing to catch here. Coming up: <b>Starting a conversation</b>. Listen for <b lang='pt-BR'>estudo bíblico</b><span class='mref' data-mid='p4t0' hidden> (Bible study)</span>.</p>
+<button class='here' type='button' data-k='4' hidden>We're on this part now</button></section>
+<section class='seg' data-k='5' hidden><div class='segmeta'>Part 4 of 8 · 3 min</div><h2 lang='pt-BR'>Iniciando conversas</h2><div class='en'>Starting a conversation</div>
+<div class='t mainp' role='checkbox' tabindex='0' aria-checked='false' data-id='p4t0'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>estudo bíblico</div><div class='mean' data-mid='p4t0'><div class='yours'></div><div class='en-m' hidden>Bible study</div><button class='showm' type='button' data-mid='p4t0'>Show meaning</button></div><div class='say'>es-TOO-doo BEE-blee-koo</div></div><button class='hear' type='button' data-say='estudo bíblico' aria-label='Hear estudo bíblico' hidden>▶ Hear</button></div>
+<details class='more'><summary>More phrases (2)</summary>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p4t1'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>de casa em casa</div><div class='mean' data-mid='p4t1'><div class='yours'></div><div class='en-m' hidden>house to house</div><button class='showm' type='button' data-mid='p4t1'>Show meaning</button></div><div class='say'>djee KAH-zah en KAH-zah</div></div><button class='hear' type='button' data-say='de casa em casa' aria-label='Hear de casa em casa' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p4t2'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>Bom dia / Boa noite</div><div class='mean' data-mid='p4t2'><div class='yours'></div><div class='en-m' hidden>Good morning / Good evening</div><button class='showm' type='button' data-mid='p4t2'>Show meaning</button></div><div class='say'>bohn DJEE-ah / BOH-ah NOY-chee</div><div class='tip'>Very likely, but not printed in the workbook.</div></div><button class='hear' type='button' data-say='Bom dia / Boa noite' aria-label='Hear Bom dia / Boa noite' hidden>▶ Hear</button></div>
+</details>
+<button class='here' type='button' data-k='5' hidden>We're on this part now</button></section>
+<section class='seg' data-k='6' hidden><div class='segmeta'>Part 5 of 8 · 4 min</div><h2 lang='pt-BR'>Iniciando conversas</h2><div class='en'>Starting a conversation</div>
+<div class='t mainp' role='checkbox' tabindex='0' aria-checked='false' data-id='p5t0'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>Filho de Deus</div><div class='mean' data-mid='p5t0'><div class='yours'></div><div class='en-m' hidden>Son of God</div><button class='showm' type='button' data-mid='p5t0'>Show meaning</button></div><div class='say'>FEE-lyoo djee DAY-oos</div></div><button class='hear' type='button' data-say='Filho de Deus' aria-label='Hear Filho de Deus' hidden>▶ Hear</button></div>
+<details class='more'><summary>More phrases (1)</summary>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p5t1'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>não concorda</div><div class='mean' data-mid='p5t1'><div class='yours'></div><div class='en-m' hidden>doesn&#x27;t agree</div><button class='showm' type='button' data-mid='p5t1'>Show meaning</button></div><div class='say'>nown kon-KOR-dah</div></div><button class='hear' type='button' data-say='não concorda' aria-label='Hear não concorda' hidden>▶ Hear</button></div>
+</details>
+<button class='here' type='button' data-k='6' hidden>We're on this part now</button></section>
+<section class='seg' data-k='7' hidden><div class='segmeta'>Part 6 of 8 · 5 min</div><h2 lang='pt-BR'>Discurso</h2><div class='en'>Talk</div>
+<div class='t mainp' role='checkbox' tabindex='0' aria-checked='false' data-id='p6t0'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>Reino de Deus</div><div class='mean' data-mid='p6t0'><div class='yours'></div><div class='en-m' hidden>God&#x27;s Kingdom</div><button class='showm' type='button' data-mid='p6t0'>Show meaning</button></div><div class='say'>HAY-noo djee DAY-oos</div><div class='tip'>Brazilian R at the start sounds like an English H.</div></div><button class='hear' type='button' data-say='Reino de Deus' aria-label='Hear Reino de Deus' hidden>▶ Hear</button></div>
+<details class='more'><summary>More phrases (2)</summary>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p6t1'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>governo</div><div class='mean' data-mid='p6t1'><div class='yours'></div><div class='en-m' hidden>government</div><button class='showm' type='button' data-mid='p6t1'>Show meaning</button></div><div class='say'>go-VEHR-noo</div></div><button class='hear' type='button' data-say='governo' aria-label='Hear governo' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p6t2'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>no céu</div><div class='mean' data-mid='p6t2'><div class='yours'></div><div class='en-m' hidden>in heaven</div><button class='showm' type='button' data-mid='p6t2'>Show meaning</button></div><div class='say'>noo SEH-oo</div></div><button class='hear' type='button' data-say='no céu' aria-label='Hear no céu' hidden>▶ Hear</button></div>
+</details>
+<button class='here' type='button' data-k='7' hidden>We're on this part now</button></section>
+<section class='seg' data-k='8' hidden><div class='segmeta'>Between parts · about 4 min</div><h2 lang='pt-BR'>Cântico 10</h2><div class='en'>Song</div>
+<p class='calm'>Nothing to catch here. Coming up: <b>Our donations glorify God&#x27;s beautiful name</b>. Listen for <b lang='pt-BR'>donativos</b><span class='mref' data-mid='p7t0' hidden> (donations)</span>.</p>
+<button class='here' type='button' data-k='8' hidden>We're on this part now</button></section>
+<section class='seg' data-k='9' hidden><div class='segmeta'>Part 7 of 8 · 15 min</div><h2 lang='pt-BR'>Nossos donativos dão glória ao belo nome de Jeová</h2><div class='en'>Our donations glorify God&#x27;s beautiful name</div>
+<div class='t mainp' role='checkbox' tabindex='0' aria-checked='false' data-id='p7t0'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>donativos</div><div class='mean' data-mid='p7t0'><div class='yours'></div><div class='en-m' hidden>donations</div><button class='showm' type='button' data-mid='p7t0'>Show meaning</button></div><div class='say'>doh-nah-CHEE-voos</div></div><button class='hear' type='button' data-say='donativos' aria-label='Hear donativos' hidden>▶ Hear</button></div>
+<details class='more'><summary>More phrases (3)</summary>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p7t1'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>dar glória</div><div class='mean' data-mid='p7t1'><div class='yours'></div><div class='en-m' hidden>to give glory</div><button class='showm' type='button' data-mid='p7t1'>Show meaning</button></div><div class='say'>dar GLOH-ree-ah</div></div><button class='hear' type='button' data-say='dar glória' aria-label='Hear dar glória' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p7t2'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>projetos da organização</div><div class='mean' data-mid='p7t2'><div class='yours'></div><div class='en-m' hidden>the organization&#x27;s projects</div><button class='showm' type='button' data-mid='p7t2'>Show meaning</button></div><div class='say'>pro-ZHEH-toos dah or-gah-nee-zah-SOWN</div></div><button class='hear' type='button' data-say='projetos da organização' aria-label='Hear projetos da organização' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p7t3'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>atualizações</div><div class='mean' data-mid='p7t3'><div class='yours'></div><div class='en-m' hidden>updates</div><button class='showm' type='button' data-mid='p7t3'>Show meaning</button></div><div class='say'>ah-too-ah-lee-zah-SOINS</div></div><button class='hear' type='button' data-say='atualizações' aria-label='Hear atualizações' hidden>▶ Hear</button></div>
+</details>
+<button class='here' type='button' data-k='9' hidden>We're on this part now</button></section>
+<section class='seg' data-k='10' hidden><div class='segmeta'>Part 8 of 8 · about 12 min</div><h2 lang='pt-BR'>Estudo bíblico de congregação · O relato</h2><div class='en'>Congregation Bible Study · The account</div>
+<div class='t mainp' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t1'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>Certamente irei com você</div><div class='mean' data-mid='p8t1'><div class='yours'></div><div class='en-m' hidden>I will certainly go with you</div><button class='showm' type='button' data-mid='p8t1'>Show meaning</button></div><div class='say'>ser-tah-MEN-chee ee-RAY kon voh-SEH</div><div class='tip'>The chapter title, and Deborah&#x27;s words in the story.</div></div><button class='hear' type='button' data-say='Certamente irei com você' aria-label='Hear Certamente irei com você' hidden>▶ Hear</button></div>
+<details class='more'><summary>More phrases (5)</summary>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t0'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>Baraque e Débora</div><div class='mean' data-mid='p8t0'><div class='yours'></div><div class='en-m' hidden>Barak and Deborah</div><button class='showm' type='button' data-mid='p8t0'>Show meaning</button></div><div class='say'>bah-RAH-kee ee DEH-boh-rah</div><div class='tip'>Names come up dozens of times. A warm-up.</div></div><button class='hear' type='button' data-say='Baraque e Débora' aria-label='Hear Baraque e Débora' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t2'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>carros de guerra</div><div class='mean' data-mid='p8t2'><div class='yours'></div><div class='en-m' hidden>war chariots</div><button class='showm' type='button' data-mid='p8t2'>Show meaning</button></div><div class='say'>KAH-hoos djee GEH-hah</div></div><button class='hear' type='button' data-say='carros de guerra' aria-label='Hear carros de guerra' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t3'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>exército</div><div class='mean' data-mid='p8t3'><div class='yours'></div><div class='en-m' hidden>army</div><button class='showm' type='button' data-mid='p8t3'>Show meaning</button></div><div class='say'>eh-ZEHR-see-too</div></div><button class='hear' type='button' data-say='exército' aria-label='Hear exército' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t4'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>profetisa</div><div class='mean' data-mid='p8t4'><div class='yours'></div><div class='en-m' hidden>prophetess</div><button class='showm' type='button' data-mid='p8t4'>Show meaning</button></div><div class='say'>pro-feh-CHEE-zah</div></div><button class='hear' type='button' data-say='profetisa' aria-label='Hear profetisa' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t5'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>monte Tabor</div><div class='mean' data-mid='p8t5'><div class='yours'></div><div class='en-m' hidden>Mount Tabor</div><button class='showm' type='button' data-mid='p8t5'>Show meaning</button></div><div class='say'>MON-chee tah-BOR</div></div><button class='hear' type='button' data-say='monte Tabor' aria-label='Hear monte Tabor' hidden>▶ Hear</button></div>
+</details>
+<button class='here' type='button' data-k='10' hidden>We're on this part now</button></section>
+<section class='seg' data-k='11' hidden><div class='segmeta'>Part 8 of 8 · about 18 min</div><h2 lang='pt-BR'>Estudo bíblico de congregação · Perguntas</h2><div class='en'>Congregation Bible Study · Discussion questions</div>
+<div class='t mainp' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t6'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>coragem</div><div class='mean' data-mid='p8t6'><div class='yours'></div><div class='en-m' hidden>courage <span class='en'>· corajosa = brave</span></div><button class='showm' type='button' data-mid='p8t6'>Show meaning</button></div><div class='say'>koh-RAH-zhen</div></div><button class='hear' type='button' data-say='coragem' aria-label='Hear coragem' hidden>▶ Hear</button></div>
+<details class='more'><summary>More phrases (2)</summary>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t7'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>mãe em Israel</div><div class='mean' data-mid='p8t7'><div class='yours'></div><div class='en-m' hidden>a mother in Israel</div><button class='showm' type='button' data-mid='p8t7'>Show meaning</button></div><div class='say'>mahyn en eez-hah-EW</div></div><button class='hear' type='button' data-say='mãe em Israel' aria-label='Hear mãe em Israel' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t8'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>as estrelas lutaram</div><div class='mean' data-mid='p8t8'><div class='yours'></div><div class='en-m' hidden>the stars fought</div><button class='showm' type='button' data-mid='p8t8'>Show meaning</button></div><div class='say'>ahs es-TREH-lahs loo-TAH-rown</div></div><button class='hear' type='button' data-say='as estrelas lutaram' aria-label='Hear as estrelas lutaram' hidden>▶ Hear</button></div>
+</details>
+<div class='lf'>Box question: “De que maneiras Baraque e Débora mostraram coragem?” (In what ways did Barak and Deborah show courage?) Catch one word of an answer.</div>
+<button class='here' type='button' data-k='11' hidden>We're on this part now</button></section>
+<section class='seg' data-k='12' hidden><div class='segmeta'>Between parts · about 8 min</div><h2 lang='pt-BR'>Comentários finais, cântico e oração</h2><div class='en'>Closing comments, song and prayer</div>
+<div class='wrap'><p class='big'>You caught <b class='caught'>0</b> phrases tonight.</p><p>How did it feel?</p><div class='feel row'><button type='button' data-feel='easier'>Easier than usual</button><button type='button' data-feel='same'>About the same</button><button type='button' data-feel='harder'>Harder</button></div><p class='note'>That's all. Anything you want to write down can go in the full sheet.</p></div>
+<button class='here' type='button' data-k='12' hidden>We're on this part now</button></section>
+<div class='fnav'><button id='prevBtn' type='button' aria-label='Previous part'>‹ Back</button><button id='whereBtn' class='primary' type='button'>Where are we?</button><button id='nextBtn' type='button' aria-label='Next part'>Next ›</button></div>
+<div class='dots' role='group' aria-label='Meeting parts'><button class='dot' type='button' data-k='0' aria-label='Song and prayer'></button><button class='dot' type='button' data-k='1' aria-label='Opening comments'></button><button class='dot' type='button' data-k='2' aria-label='Learn from the warning example of Zedekiah'></button><button class='dot' type='button' data-k='3' aria-label='Spiritual gems'></button><button class='dot' type='button' data-k='4' aria-label='Bible reading'></button><button class='dot' type='button' data-k='5' aria-label='Starting a conversation'></button><button class='dot' type='button' data-k='6' aria-label='Starting a conversation'></button><button class='dot' type='button' data-k='7' aria-label='Talk'></button><button class='dot' type='button' data-k='8' aria-label='Song'></button><button class='dot' type='button' data-k='9' aria-label='Our donations glorify God&#x27;s beautiful name'></button><button class='dot' type='button' data-k='10' aria-label='Congregation Bible Study · The account'></button><button class='dot' type='button' data-k='11' aria-label='Congregation Bible Study · Discussion questions'></button><button class='dot' type='button' data-k='12' aria-label='Closing comments, song and prayer'></button></div>
+<div class='row setting'><span>Show</span><button type='button' data-phrases='main'>Main phrase only</button><button type='button' data-phrases='all'>All phrases</button></div>
+<details class='card prep'><summary>Keep other apps out of the way</summary>
+<p class='note'><b>iPhone:</b> Guided Access locks the phone to this page. Turn it on in Settings → Accessibility → Guided Access, then triple-click the side button while this page is open. A Focus mode (or Do Not Disturb) silences notifications.</p>
+<p class='note'><b>Android:</b> App pinning keeps this screen up (search Settings for “pinning”), and Do Not Disturb silences notifications.</p></details>
+</div>
+<div id='sheetView' hidden>
 <div class='card how'><strong>How this works</strong><ol>
 <li><b>Before:</b> do the snapshot at the bottom first. Then read each phrase out loud once, using the sound hint. If you can, read Jeremias 52:6-20 and the Juízes accounts in Portuguese in JW Library.</li>
 <li><b>During:</b> when you hear a phrase, tap it. Glance at the next part when it starts, then just listen.</li>
 <li><b>After:</b> look at your number. Nothing here is graded, and anything you didn't catch simply comes back another week.</li></ol></div>
-<div class='bar' role='status'><span>Phrases caught <b class='caught'>0</b></span><small id='status'></small></div>
 <div class='parts'>
 <section class='part'><header><h3>1. Não siga o exemplo de Zedequias</h3><span class='min'>10 min</span></header>
 <div class='en'>Learn from the warning example of Zedekiah</div><div class='kind'>Talk · the speaker reads Jeremiah 52:1-3, 8-11</div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p1t0'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>Zedequias</div><div>Zedekiah</div><div class='say'>zeh-deh-KEE-ahs</div><div class='tip'>You&#x27;ll hear this a lot. A warm-up.</div></div></div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p1t1'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>rei de Babilônia</div><div>king of Babylon</div><div class='say'>hay djee bah-bee-LOH-nya</div></div></div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p1t2'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>juramento</div><div>oath <span class='en'>· jurou = he swore</span></div><div class='say'>zhoo-rah-MEN-too</div></div></div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p1t3'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>cumprir</div><div>to keep / fulfill (a promise)</div><div class='say'>koom-PREER</div></div></div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p1t4'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>levar a sério</div><div>to take seriously</div><div class='say'>leh-VAR ah SEH-ryoo</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p1t0'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>Zedequias</div><div>Zedekiah</div><div class='say'>zeh-deh-KEE-ahs</div><div class='tip'>You&#x27;ll hear this a lot. A warm-up.</div></div><button class='hear' type='button' data-say='Zedequias' aria-label='Hear Zedequias' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p1t1'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>rei de Babilônia</div><div>king of Babylon</div><div class='say'>hay djee bah-bee-LOH-nya</div></div><button class='hear' type='button' data-say='rei de Babilônia' aria-label='Hear rei de Babilônia' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p1t2'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>juramento</div><div>oath <span class='en'>· jurou = he swore</span></div><div class='say'>zhoo-rah-MEN-too</div></div><button class='hear' type='button' data-say='juramento' aria-label='Hear juramento' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p1t3'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>cumprir</div><div>to keep / fulfill (a promise)</div><div class='say'>koom-PREER</div></div><button class='hear' type='button' data-say='cumprir' aria-label='Hear cumprir' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p1t4'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>levar a sério</div><div>to take seriously</div><div class='say'>leh-VAR ah SEH-ryoo</div></div><button class='hear' type='button' data-say='levar a sério' aria-label='Hear levar a sério' hidden>▶ Hear</button></div>
 <div class='lf'>The closing question: “O que eu tenho que fazer para não ser como Zedequias?” (What do I need to do so I&#x27;m not like Zedekiah?) Catch one word of the answer.</div>
 <textarea id='note-1' data-field='note-1' rows='1' aria-label='Other words I caught in part 1' placeholder='Other words I caught here (optional)'></textarea></section>
 <section class='part'><header><h3>2. Joias espirituais</h3><span class='min'>10 min</span></header>
 <div class='en'>Spiritual gems</div><div class='kind'>Q&amp;A with the audience · Jeremiah 51:6, 7, 36 read first</div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p2t0'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>Fujam do meio de Babilônia</div><div>Flee out of the midst of Babylon</div><div class='say'>FOO-zhown doo MAY-oo djee bah-bee-LOH-nya</div></div></div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p2t1'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>vingança</div><div>vengeance</div><div class='say'>veen-GAN-sah</div></div></div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p2t2'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>mensagem</div><div>message</div><div class='say'>men-SAH-zhen</div></div></div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p2t3'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>joias espirituais</div><div>spiritual gems</div><div class='say'>ZHOY-ahs es-pee-ree-too-AISS</div><div class='tip'>Said when the audience is invited to comment.</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p2t0'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>Fujam do meio de Babilônia</div><div>Flee out of the midst of Babylon</div><div class='say'>FOO-zhown doo MAY-oo djee bah-bee-LOH-nya</div></div><button class='hear' type='button' data-say='Fujam do meio de Babilônia' aria-label='Hear Fujam do meio de Babilônia' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p2t1'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>vingança</div><div>vengeance</div><div class='say'>veen-GAN-sah</div></div><button class='hear' type='button' data-say='vingança' aria-label='Hear vingança' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p2t2'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>mensagem</div><div>message</div><div class='say'>men-SAH-zhen</div></div><button class='hear' type='button' data-say='mensagem' aria-label='Hear mensagem' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p2t3'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>joias espirituais</div><div>spiritual gems</div><div class='say'>ZHOY-ahs es-pee-ree-too-AISS</div><div class='tip'>Said when the audience is invited to comment.</div></div><button class='hear' type='button' data-say='joias espirituais' aria-label='Hear joias espirituais' hidden>▶ Hear</button></div>
 <textarea id='note-2' data-field='note-2' rows='1' aria-label='Other words I caught in part 2' placeholder='Other words I caught here (optional)'></textarea></section>
 <section class='part'><header><h3>3. Leitura da Bíblia</h3><span class='min'>4 min</span></header>
 <div class='en'>Bible reading</div><div class='kind'>Jeremiah 52:6-20 read aloud word for word</div>
@@ -97,39 +275,39 @@ details{margin-top:10px} summary{cursor:pointer;color:var(--accent)}
 <textarea id='note-3' data-field='note-3' rows='1' aria-label='Other words I caught in part 3' placeholder='Other words I caught here (optional)'></textarea></section>
 <section class='part'><header><h3>4. Iniciando conversas</h3><span class='min'>3 min</span></header>
 <div class='en'>Starting a conversation</div><div class='kind'>Demonstration · offering a Bible study</div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p4t0'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>estudo bíblico</div><div>Bible study</div><div class='say'>es-TOO-doo BEE-blee-koo</div></div></div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p4t1'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>de casa em casa</div><div>house to house</div><div class='say'>djee KAH-zah en KAH-zah</div></div></div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p4t2'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>Bom dia / Boa noite</div><div>Good morning / Good evening</div><div class='say'>bohn DJEE-ah / BOH-ah NOY-chee</div><div class='tip'>Very likely, but not printed in the workbook.</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p4t0'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>estudo bíblico</div><div>Bible study</div><div class='say'>es-TOO-doo BEE-blee-koo</div></div><button class='hear' type='button' data-say='estudo bíblico' aria-label='Hear estudo bíblico' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p4t1'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>de casa em casa</div><div>house to house</div><div class='say'>djee KAH-zah en KAH-zah</div></div><button class='hear' type='button' data-say='de casa em casa' aria-label='Hear de casa em casa' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p4t2'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>Bom dia / Boa noite</div><div>Good morning / Good evening</div><div class='say'>bohn DJEE-ah / BOH-ah NOY-chee</div><div class='tip'>Very likely, but not printed in the workbook.</div></div><button class='hear' type='button' data-say='Bom dia / Boa noite' aria-label='Hear Bom dia / Boa noite' hidden>▶ Hear</button></div>
 <textarea id='note-4' data-field='note-4' rows='1' aria-label='Other words I caught in part 4' placeholder='Other words I caught here (optional)'></textarea></section>
 <section class='part'><header><h3>5. Iniciando conversas</h3><span class='min'>4 min</span></header>
 <div class='en'>Starting a conversation</div><div class='kind'>Demonstration · householder objects that Jesus is God&#x27;s Son</div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p5t0'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>Filho de Deus</div><div>Son of God</div><div class='say'>FEE-lyoo djee DAY-oos</div></div></div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p5t1'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>não concorda</div><div>doesn&#x27;t agree</div><div class='say'>nown kon-KOR-dah</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p5t0'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>Filho de Deus</div><div>Son of God</div><div class='say'>FEE-lyoo djee DAY-oos</div></div><button class='hear' type='button' data-say='Filho de Deus' aria-label='Hear Filho de Deus' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p5t1'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>não concorda</div><div>doesn&#x27;t agree</div><div class='say'>nown kon-KOR-dah</div></div><button class='hear' type='button' data-say='não concorda' aria-label='Hear não concorda' hidden>▶ Hear</button></div>
 <textarea id='note-5' data-field='note-5' rows='1' aria-label='Other words I caught in part 5' placeholder='Other words I caught here (optional)'></textarea></section>
 <section class='part'><header><h3>6. Discurso</h3><span class='min'>5 min</span></header>
 <div class='en'>Talk</div><div class='kind'>Theme: God&#x27;s Kingdom is a real government in heaven</div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p6t0'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>Reino de Deus</div><div>God&#x27;s Kingdom</div><div class='say'>HAY-noo djee DAY-oos</div><div class='tip'>Brazilian R at the start sounds like an English H.</div></div></div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p6t1'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>governo</div><div>government</div><div class='say'>go-VEHR-noo</div></div></div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p6t2'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>no céu</div><div>in heaven</div><div class='say'>noo SEH-oo</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p6t0'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>Reino de Deus</div><div>God&#x27;s Kingdom</div><div class='say'>HAY-noo djee DAY-oos</div><div class='tip'>Brazilian R at the start sounds like an English H.</div></div><button class='hear' type='button' data-say='Reino de Deus' aria-label='Hear Reino de Deus' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p6t1'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>governo</div><div>government</div><div class='say'>go-VEHR-noo</div></div><button class='hear' type='button' data-say='governo' aria-label='Hear governo' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p6t2'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>no céu</div><div>in heaven</div><div class='say'>noo SEH-oo</div></div><button class='hear' type='button' data-say='no céu' aria-label='Hear no céu' hidden>▶ Hear</button></div>
 <textarea id='note-6' data-field='note-6' rows='1' aria-label='Other words I caught in part 6' placeholder='Other words I caught here (optional)'></textarea></section>
 <section class='part'><header><h3>7. Nossos donativos dão glória ao belo nome de Jeová</h3><span class='min'>15 min</span></header>
 <div class='en'>Our donations glorify God&#x27;s beautiful name</div><div class='kind'>Discussion by an elder + video + 3 audience questions</div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p7t0'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>donativos</div><div>donations</div><div class='say'>doh-nah-CHEE-voos</div></div></div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p7t1'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>dar glória</div><div>to give glory</div><div class='say'>dar GLOH-ree-ah</div></div></div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p7t2'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>projetos da organização</div><div>the organization&#x27;s projects</div><div class='say'>pro-ZHEH-toos dah or-gah-nee-zah-SOWN</div></div></div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p7t3'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>atualizações</div><div>updates</div><div class='say'>ah-too-ah-lee-zah-SOINS</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p7t0'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>donativos</div><div>donations</div><div class='say'>doh-nah-CHEE-voos</div></div><button class='hear' type='button' data-say='donativos' aria-label='Hear donativos' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p7t1'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>dar glória</div><div>to give glory</div><div class='say'>dar GLOH-ree-ah</div></div><button class='hear' type='button' data-say='dar glória' aria-label='Hear dar glória' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p7t2'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>projetos da organização</div><div>the organization&#x27;s projects</div><div class='say'>pro-ZHEH-toos dah or-gah-nee-zah-SOWN</div></div><button class='hear' type='button' data-say='projetos da organização' aria-label='Hear projetos da organização' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p7t3'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>atualizações</div><div>updates</div><div class='say'>ah-too-ah-lee-zah-SOINS</div></div><button class='hear' type='button' data-say='atualizações' aria-label='Hear atualizações' hidden>▶ Hear</button></div>
 <textarea id='note-7' data-field='note-7' rows='1' aria-label='Other words I caught in part 7' placeholder='Other words I caught here (optional)'></textarea></section>
 <section class='part'><header><h3>8. Estudo bíblico de congregação</h3><span class='min'>30 min</span></header>
 <div class='en'>Congregation Bible Study</div><div class='kind'>wcg chapter 16 · Barak and Deborah: “I Will Certainly Go With You” · story, then discussion questions</div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t0'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>Baraque e Débora</div><div>Barak and Deborah</div><div class='say'>bah-RAH-kee ee DEH-boh-rah</div><div class='tip'>Names come up dozens of times. A warm-up.</div></div></div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t1'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>Certamente irei com você</div><div>I will certainly go with you</div><div class='say'>ser-tah-MEN-chee ee-RAY kon voh-SEH</div><div class='tip'>The chapter title, and Deborah&#x27;s words in the story.</div></div></div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t2'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>carros de guerra</div><div>war chariots</div><div class='say'>KAH-hoos djee GEH-hah</div></div></div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t3'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>exército</div><div>army</div><div class='say'>eh-ZEHR-see-too</div></div></div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t4'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>profetisa</div><div>prophetess</div><div class='say'>pro-feh-CHEE-zah</div></div></div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t5'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>monte Tabor</div><div>Mount Tabor</div><div class='say'>MON-chee tah-BOR</div></div></div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t6'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>coragem</div><div>courage <span class='en'>· corajosa = brave</span></div><div class='say'>koh-RAH-zhen</div></div></div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t7'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>mãe em Israel</div><div>a mother in Israel</div><div class='say'>mahyn en eez-hah-EW</div></div></div>
-<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t8'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>as estrelas lutaram</div><div>the stars fought</div><div class='say'>ahs es-TREH-lahs loo-TAH-rown</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t0'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>Baraque e Débora</div><div>Barak and Deborah</div><div class='say'>bah-RAH-kee ee DEH-boh-rah</div><div class='tip'>Names come up dozens of times. A warm-up.</div></div><button class='hear' type='button' data-say='Baraque e Débora' aria-label='Hear Baraque e Débora' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t1'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>Certamente irei com você</div><div>I will certainly go with you</div><div class='say'>ser-tah-MEN-chee ee-RAY kon voh-SEH</div><div class='tip'>The chapter title, and Deborah&#x27;s words in the story.</div></div><button class='hear' type='button' data-say='Certamente irei com você' aria-label='Hear Certamente irei com você' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t2'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>carros de guerra</div><div>war chariots</div><div class='say'>KAH-hoos djee GEH-hah</div></div><button class='hear' type='button' data-say='carros de guerra' aria-label='Hear carros de guerra' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t3'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>exército</div><div>army</div><div class='say'>eh-ZEHR-see-too</div></div><button class='hear' type='button' data-say='exército' aria-label='Hear exército' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t4'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>profetisa</div><div>prophetess</div><div class='say'>pro-feh-CHEE-zah</div></div><button class='hear' type='button' data-say='profetisa' aria-label='Hear profetisa' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t5'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>monte Tabor</div><div>Mount Tabor</div><div class='say'>MON-chee tah-BOR</div></div><button class='hear' type='button' data-say='monte Tabor' aria-label='Hear monte Tabor' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t6'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>coragem</div><div>courage <span class='en'>· corajosa = brave</span></div><div class='say'>koh-RAH-zhen</div></div><button class='hear' type='button' data-say='coragem' aria-label='Hear coragem' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t7'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>mãe em Israel</div><div>a mother in Israel</div><div class='say'>mahyn en eez-hah-EW</div></div><button class='hear' type='button' data-say='mãe em Israel' aria-label='Hear mãe em Israel' hidden>▶ Hear</button></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t8'><span class='box' aria-hidden='true'></span><div class='tx'><div class='pt' lang='pt-BR'>as estrelas lutaram</div><div>the stars fought</div><div class='say'>ahs es-TREH-lahs loo-TAH-rown</div></div><button class='hear' type='button' data-say='as estrelas lutaram' aria-label='Hear as estrelas lutaram' hidden>▶ Hear</button></div>
 <div class='lf'>Box question: “De que maneiras Baraque e Débora mostraram coragem?” (In what ways did Barak and Deborah show courage?) Catch one word of an answer.</div>
 <textarea id='note-8' data-field='note-8' rows='1' aria-label='Other words I caught in part 8' placeholder='Other words I caught here (optional)'></textarea></section>
 </div>
@@ -178,7 +356,7 @@ details{margin-top:10px} summary{cursor:pointer;color:var(--accent)}
 <tr><td class='w' lang='pt-BR'>25. morador<span class='ans' lang='en'>householder, resident</span></td><td><input type='text' id='guess-25' data-field='guess-25' aria-label='Meaning of morador'></td><td class='k no-print'><button class='knew' type='button' data-knew='25'>Knew it</button></td></tr>
 </table><p class='print-only'>Words I knew: ____ / 25</p></section>
 <section class='page print-only'><h2>Snapshot answers</h2><div class='grid2'><table><tr><td class='w'>1. dedicação</td><td>dedication</td></tr><tr><td class='w'>2. promessa</td><td>promise</td></tr><tr><td class='w'>3. mensagem</td><td>message</td></tr><tr><td class='w'>4. profecia</td><td>prophecy</td></tr><tr><td class='w'>5. governo</td><td>government</td></tr><tr><td class='w'>6. organização</td><td>organization</td></tr><tr><td class='w'>7. oportunidade</td><td>opportunity</td></tr><tr><td class='w'>8. consequências</td><td>consequences</td></tr><tr><td class='w'>9. exemplo</td><td>example</td></tr><tr><td class='w'>10. espiritual</td><td>spiritual</td></tr><tr><td class='w'>11. coragem</td><td>courage</td></tr><tr><td class='w'>12. exército</td><td>army</td></tr><tr><td class='w'>13. rei</td><td>king</td></tr></table><table><tr><td class='w'>14. reino</td><td>kingdom</td></tr><tr><td class='w'>15. céu</td><td>heaven, sky</td></tr><tr><td class='w'>16. vida</td><td>life</td></tr><tr><td class='w'>17. palavra</td><td>word</td></tr><tr><td class='w'>18. verdade</td><td>truth</td></tr><tr><td class='w'>19. nome</td><td>name</td></tr><tr><td class='w'>20. filho</td><td>son</td></tr><tr><td class='w'>21. povo</td><td>people</td></tr><tr><td class='w'>22. juramento</td><td>oath</td></tr><tr><td class='w'>23. cumprir</td><td>to fulfill, keep (a promise)</td></tr><tr><td class='w'>24. vingança</td><td>vengeance</td></tr><tr><td class='w'>25. morador</td><td>householder, resident</td></tr></table></div></section>
-<p class='note'>Sound hints are approximate Brazilian Portuguese. Speakers from other regions will sound different.</p></main><script>const DATA={"id": "2026-11-11-midweek", "label": "November 11", "baselineTotal": 25};
+<p class='note'>Sound hints are approximate Brazilian Portuguese. Speakers from other regions will sound different.</p></div></main><script>const DATA={"id": "2026-11-11-midweek", "label": "November 11", "baselineTotal": 25, "timeline": [{"min": 5, "label": "Song and prayer"}, {"min": 1, "label": "Opening comments"}, {"min": 10, "label": "Learn from the warning example of Zedekiah"}, {"min": 10, "label": "Spiritual gems"}, {"min": 5, "label": "Bible reading"}, {"min": 4, "label": "Starting a conversation"}, {"min": 5, "label": "Starting a conversation"}, {"min": 6, "label": "Talk"}, {"min": 4, "label": "Song"}, {"min": 15, "label": "Our donations glorify God's beautiful name"}, {"min": 12, "label": "Congregation Bible Study · The account"}, {"min": 18, "label": "Congregation Bible Study · Discussion questions"}, {"min": 8, "label": "Closing comments, song and prayer"}]};
 const KEY = 'listening-tracker-v1';
 const CUR = DATA.id;
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
@@ -262,6 +440,7 @@ let timer; function persistSoon() { clearTimeout(timer); timer = setTimeout(pers
 
 // ---- rendering ----
 function paint() {
+  paintFocus();
   $$('.t').forEach(el => el.setAttribute('aria-checked', String(!!st.checks[el.dataset.id])));
   $$('[data-field]').forEach(el => { if (document.activeElement !== el) el.value = st.fields[el.dataset.field] || ''; });
   $$('button.knew').forEach(b => { const on = !!st.knew[b.dataset.knew]; b.classList.toggle('on', on); b.textContent = on ? 'Knew it ✓' : 'Knew it'; b.setAttribute('aria-pressed', String(on)); });
@@ -331,5 +510,123 @@ $('#clear').addEventListener('click', e => {
   st = blank(); armed = false; e.target.textContent = 'Clear this week'; persist();
 });
 
+// ---- focus mode ----
+// ':ui3' because earlier versions saved their defaults on every visit, not just on a real choice
+let ui = {view: 'focus', phrases: 'all'};
+try { Object.assign(ui, JSON.parse(localStorage.getItem(KEY + ':ui3') || '{}')); } catch (e) {}
+const saveUi = () => { try { localStorage.setItem(KEY + ':ui3', JSON.stringify(ui)); } catch (e) {} };
+const TL = DATA.timeline;
+const segs = $$('#focusView .seg');
+let shown = 0;
+const minsBefore = idx => TL.slice(0, idx).reduce((a, s) => a + s.min, 0);
+function estIndex() {          // which part the meeting is probably on, from the last time it was set
+  const c = st.clock; if (!c) return null;
+  let t = (Date.now() - c.at) / 60000, i = c.idx;
+  while (t >= 0 && i < TL.length - 1 && t >= TL[i].min) { t -= TL[i].min; i++; }
+  return i;
+}
+function show(i) {
+  shown = Math.max(0, Math.min(segs.length - 1, i));
+  segs.forEach((s, k) => { s.hidden = k !== shown; });
+  $('#whereMsg').textContent = '';
+  paintFocus();
+}
+function setView(v, remember) {
+  ui.view = v; if (remember) saveUi();
+  $('#sheetView').hidden = v !== 'sheet'; $('#focusView').hidden = v !== 'focus';
+  $$('.views button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === v)));
+  if (v === 'focus') { const e = estIndex(); show(e === null ? shown : e); }
+  window.scrollTo(0, 0);
+}
+function paintFocus() {
+  if (!segs.length) return;
+  const e = estIndex();
+  $('#startBtn').hidden = !!st.clock; $('#startedRow').hidden = !st.clock;
+  if (st.clock) $('#startedMsg').textContent = st.clock.start
+    ? 'Following along. Started at ' + new Date(st.clock.start).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}) + '.'
+    : 'Following along from ' + TL[st.clock.idx].label + '.';
+  const off = e !== null && e !== shown;
+  $('#hint').hidden = !off; if (off) $('#hintLabel').textContent = TL[e].label;
+  $$('.here').forEach(b => { b.hidden = +b.dataset.k !== shown || (e !== null && !off); });
+  $$('.dot').forEach(d => {
+    const k = +d.dataset.k;
+    d.classList.toggle('cur', k === shown);
+    d.classList.toggle('done', [...segs[k].querySelectorAll('.t')].some(t => st.checks[t.dataset.id]));
+    if (k === shown) d.setAttribute('aria-current', 'step'); else d.removeAttribute('aria-current');
+  });
+  $('#prevBtn').disabled = shown === 0; $('#nextBtn').disabled = shown === segs.length - 1;
+  $$('[data-phrases]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.phrases === ui.phrases)));
+  $$('[data-feel]').forEach(b => b.setAttribute('aria-pressed', String(st.fields.feel === b.dataset.feel)));
+  $$('.mean').forEach(m => {
+    const id = m.dataset.mid, on = revealed(id), g = (st.fields['mean-' + id] || '').trim();
+    m.querySelector('.yours').textContent = g ? 'You wrote: ' + g : '';
+    m.querySelector('.en-m').hidden = !on; m.querySelector('.showm').hidden = on;
+  });
+  $$('.ans2').forEach(a => { const on = revealed(a.dataset.mid); a.hidden = !on; a.nextElementSibling.hidden = on; });
+  $$('.mref').forEach(r => { r.hidden = !revealed(r.dataset.mid); });
+}
+function setPhrases(v, remember) {
+  ui.phrases = v; if (remember) saveUi();
+  $$('.more').forEach(d => { d.open = v === 'all'; });
+  $('#prepBox').classList.toggle('mainonly', v === 'main');
+  paintFocus();
+}
+const revealed = id => !!(st.shown && st.shown[id]);
+function reveal(id) { st.shown = st.shown || {}; st.shown[id] = true; persist(); }
+
+$$('.views button').forEach(b => b.addEventListener('click', () => setView(b.dataset.view, true)));
+$('#startBtn').addEventListener('click', () => { const now = Date.now(); st.clock = {idx: 0, at: now, start: now}; $('#prepBox').open = false; persist(); show(0); });
+$$('.here').forEach(b => b.addEventListener('click', () => { st.clock = {idx: +b.dataset.k, at: Date.now(), start: st.clock ? st.clock.start || null : null}; persist(); }));
+$('#whereBtn').addEventListener('click', () => {
+  const e = estIndex();
+  if (e === null) { $('#whereMsg').textContent = 'Tap “Meeting started” when the first song begins. Opened it late? Go to the part that’s on and tap “We’re on this part now”.'; return; }
+  show(e);
+});
+let resetArmed = false, resetTimer;
+$('#resetBtn').addEventListener('click', e => {
+  if (!resetArmed) {
+    resetArmed = true; e.target.textContent = 'Tap again to reset';
+    resetTimer = setTimeout(() => { resetArmed = false; e.target.textContent = 'Reset'; }, 3000); return;
+  }
+  clearTimeout(resetTimer); resetArmed = false; e.target.textContent = 'Reset';
+  delete st.clock; persist(); show(0);
+  $('#whereMsg').textContent = 'Timer reset. Tap “Meeting started” when the first song begins.';
+});
+$('#hintGo').addEventListener('click', () => { const e = estIndex(); if (e !== null) show(e); });
+$('#prevBtn').addEventListener('click', () => show(shown - 1));
+$('#nextBtn').addEventListener('click', () => show(shown + 1));
+$$('.dot').forEach(d => d.addEventListener('click', () => show(+d.dataset.k)));
+$$('[data-phrases]').forEach(b => b.addEventListener('click', () => setPhrases(b.dataset.phrases, true)));
+$$('.showm').forEach(b => {
+  b.addEventListener('click', ev => { ev.stopPropagation(); reveal(b.dataset.mid); });
+  b.addEventListener('keydown', ev => ev.stopPropagation());
+});
+// writing a meaning and leaving the box counts as checking it
+$$('input[data-mid]').forEach(inp => inp.addEventListener('change', () => {
+  st.fields[inp.dataset.field] = inp.value; if (inp.value.trim()) reveal(inp.dataset.mid); else persist();
+}));
+$$('[data-feel]').forEach(b => b.addEventListener('click', () => { st.fields.feel = st.fields.feel === b.dataset.feel ? '' : b.dataset.feel; persist(); }));
+setInterval(paintFocus, 20000);
+
+// ---- hear a phrase (only when the device has a Portuguese voice) ----
+let ptVoice = null;
+function pickVoice() {
+  const vs = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+  ptVoice = vs.find(v => /^pt[-_]BR/i.test(v.lang)) || vs.find(v => /^pt/i.test(v.lang)) || null;
+  $$('.hear').forEach(b => { b.hidden = !ptVoice; });
+}
+if (window.speechSynthesis) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+$$('.hear').forEach(b => {
+  b.addEventListener('click', ev => {
+    ev.stopPropagation(); if (!ptVoice) return;
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(b.dataset.say); u.voice = ptVoice; u.lang = ptVoice.lang; u.rate = 0.85;
+    speechSynthesis.speak(u);
+  });
+  b.addEventListener('keydown', ev => ev.stopPropagation());
+});
+
 paint(); showStatus(); connect();
+setPhrases(ui.phrases); setView(ui.view);
+if (st.clock) $('#prepBox').open = false;
 </script></body></html>
