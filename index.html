@@ -1,0 +1,335 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='robots' content='noindex,nofollow'><title>Listening Cue Sheet</title><link rel='preconnect' href='https://fonts.googleapis.com'><link rel='preconnect' href='https://fonts.gstatic.com' crossorigin><link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap'><style>
+/* Layout: one calm reading column; a sticky tally; each meeting part is a card you tick through in order. */
+:root{
+ --bg:#f7f8f5;--card:#ffffff;--ink:#1d2421;--muted:#5b6661;--line:#dfe4e0;
+ --accent:#2f6f5e;--on-accent:#ffffff;--accent-soft:#e2f0eb;--warn:#8a5a00;--field:#ffffff;
+ --phrase:"Source Serif 4",Georgia,"Times New Roman",serif;
+ --ui:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+ --bg:#141816;--card:#1c211f;--ink:#e6ebe8;--muted:#a1ada7;--line:#2f3733;
+ --accent:#7cc4ad;--on-accent:#0f201a;--accent-soft:#1e3830;--warn:#e0b25a;--field:#141816;color-scheme:dark}}
+:root[data-theme="dark"]{
+ --bg:#141816;--card:#1c211f;--ink:#e6ebe8;--muted:#a1ada7;--line:#2f3733;
+ --accent:#7cc4ad;--on-accent:#0f201a;--accent-soft:#1e3830;--warn:#e0b25a;--field:#141816;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 var(--ui)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+main{max-width:720px;margin:0 auto;padding-block:20px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font-size:1.5rem;margin:0 0 2px;text-wrap:balance} h2{font-size:1.15rem;margin:28px 0 8px;text-wrap:balance}
+.sub{color:var(--muted);margin:0 0 16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+.how ol{margin:6px 0;padding-left:20px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:2;background:var(--accent);color:var(--on-accent);border-radius:10px;padding:10px 14px;margin:16px 0;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.bar b{font-size:1.1rem;font-variant-numeric:tabular-nums} .bar small{opacity:.9}
+.part{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:12px 0;break-inside:avoid}
+.part header{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.part h3{margin:0;font-size:1.05rem;min-width:0}
+.min{color:var(--muted);font-size:.85rem;white-space:nowrap;font-variant-numeric:tabular-nums}
+.en{color:var(--muted);font-size:.9rem} .kind{color:var(--muted);font-size:.82rem;margin:2px 0 8px}
+.t{display:flex;gap:10px;align-items:flex-start;padding:8px;border-radius:8px;cursor:pointer;user-select:none;border:1px solid transparent}
+.t:hover{border-color:var(--line)} .t:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.t .box{flex:0 0 22px;height:22px;border:2px solid var(--accent);border-radius:50%;margin-top:3px}
+.t[aria-checked=true]{background:var(--accent-soft)} .t[aria-checked=true] .box{background:var(--accent)}
+.t>div{min-width:0}
+.pt{font-family:var(--phrase);font-weight:600;font-size:1.15rem;line-height:1.3} .say{color:var(--muted);font-size:.85rem;font-style:italic}
+.tip{font-size:.82rem;color:var(--warn)}
+.lf{font-size:.9rem;border-left:3px solid var(--accent);padding:4px 10px;margin-top:6px}
+textarea,input[type=text]{width:100%;font:inherit;color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:8px;padding:8px}
+textarea:focus,input[type=text]:focus{outline:2px solid var(--accent);outline-offset:0;border-color:transparent}
+textarea{min-height:44px;resize:vertical} .part textarea{margin-top:8px;font-size:.9rem}
+label{display:block;margin:10px 0 4px;font-size:.95rem}
+table{width:100%;border-collapse:collapse} td{padding:6px 4px;border-bottom:1px solid var(--line);vertical-align:middle}
+td.w{font-family:var(--phrase);font-weight:600;font-size:1.05rem;width:38%} td.k{width:1%}
+.ans{display:none;font-family:var(--ui);font-weight:400;color:var(--muted);font-size:.85rem}
+.reveal .ans{display:block}
+button{font:inherit;border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:8px;padding:6px 12px;cursor:pointer}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button.on{background:var(--accent);color:var(--on-accent)}
+button.knew{padding:4px 8px;font-size:.82rem;white-space:nowrap}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.note{font-size:.85rem;color:var(--muted)}
+.hist div.h{display:grid;grid-template-columns:minmax(0,7.5em) 1fr auto;gap:8px;align-items:center;margin:6px 0;font-size:.9rem;font-variant-numeric:tabular-nums}
+.hist .track{height:10px;background:var(--line);border-radius:5px;overflow:hidden}
+.hist .fill{display:block;height:100%;background:var(--accent)} .hist .now{font-weight:700}
+details{margin-top:10px} summary{cursor:pointer;color:var(--accent)}
+#backupText{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.75rem;min-height:90px}
+.print-only{display:none}
+.page{break-before:page}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media print{
+ html{font-size:10.5px} body{background:#fff;color:#000;font-size:10.5px} main{padding:0;max-width:none}
+ .bar,.no-print,button,details{display:none!important} .print-only{display:block}
+ h1{font-size:16px} h2{font-size:13px;margin:10px 0 4px} .sub{margin-bottom:6px}
+ .card{padding:4px 10px} .how ol{margin:2px 0}
+ .parts{columns:2;column-gap:12px} .part{padding:6px 8px;margin:0 0 8px;border-color:#bbb}
+ .part h3{font-size:11.5px} .t{padding:2px 4px;gap:6px} .t .box{flex-basis:12px;height:12px;border-width:1.5px;margin-top:1px}
+ .pt{font-size:11.5px} .kind{margin:0 0 3px}
+ textarea,input[type=text]{border:0;border-bottom:1px solid #999;border-radius:0;min-height:0;height:18px;padding:0;resize:none}
+ .part textarea,.ans{display:none!important} td{padding:3px 4px} .grid2{display:grid;grid-template-columns:1fr 1fr;column-gap:24px}
+}
+</style></head><body><main><h1>Listening cue sheet</h1><p class='sub'>Midweek meeting · Wednesday, November 11 · 9–15 de novembro · Jeremias 51–52</p>
+<div class='card how'><strong>How this works</strong><ol>
+<li><b>Before:</b> do the snapshot at the bottom first. Then read each phrase out loud once, using the sound hint. If you can, read Jeremias 52:6-20 and the Juízes accounts in Portuguese in JW Library.</li>
+<li><b>During:</b> when you hear a phrase, tap it. Glance at the next part when it starts, then just listen.</li>
+<li><b>After:</b> look at your number. Nothing here is graded, and anything you didn't catch simply comes back another week.</li></ol></div>
+<div class='bar' role='status'><span>Phrases caught <b class='caught'>0</b></span><small id='status'></small></div>
+<div class='parts'>
+<section class='part'><header><h3>1. Não siga o exemplo de Zedequias</h3><span class='min'>10 min</span></header>
+<div class='en'>Learn from the warning example of Zedekiah</div><div class='kind'>Talk · the speaker reads Jeremiah 52:1-3, 8-11</div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p1t0'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>Zedequias</div><div>Zedekiah</div><div class='say'>zeh-deh-KEE-ahs</div><div class='tip'>You&#x27;ll hear this a lot. A warm-up.</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p1t1'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>rei de Babilônia</div><div>king of Babylon</div><div class='say'>hay djee bah-bee-LOH-nya</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p1t2'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>juramento</div><div>oath <span class='en'>· jurou = he swore</span></div><div class='say'>zhoo-rah-MEN-too</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p1t3'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>cumprir</div><div>to keep / fulfill (a promise)</div><div class='say'>koom-PREER</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p1t4'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>levar a sério</div><div>to take seriously</div><div class='say'>leh-VAR ah SEH-ryoo</div></div></div>
+<div class='lf'>The closing question: “O que eu tenho que fazer para não ser como Zedequias?” (What do I need to do so I&#x27;m not like Zedekiah?) Catch one word of the answer.</div>
+<textarea id='note-1' data-field='note-1' rows='1' aria-label='Other words I caught in part 1' placeholder='Other words I caught here (optional)'></textarea></section>
+<section class='part'><header><h3>2. Joias espirituais</h3><span class='min'>10 min</span></header>
+<div class='en'>Spiritual gems</div><div class='kind'>Q&amp;A with the audience · Jeremiah 51:6, 7, 36 read first</div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p2t0'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>Fujam do meio de Babilônia</div><div>Flee out of the midst of Babylon</div><div class='say'>FOO-zhown doo MAY-oo djee bah-bee-LOH-nya</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p2t1'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>vingança</div><div>vengeance</div><div class='say'>veen-GAN-sah</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p2t2'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>mensagem</div><div>message</div><div class='say'>men-SAH-zhen</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p2t3'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>joias espirituais</div><div>spiritual gems</div><div class='say'>ZHOY-ahs es-pee-ree-too-AISS</div><div class='tip'>Said when the audience is invited to comment.</div></div></div>
+<textarea id='note-2' data-field='note-2' rows='1' aria-label='Other words I caught in part 2' placeholder='Other words I caught here (optional)'></textarea></section>
+<section class='part'><header><h3>3. Leitura da Bíblia</h3><span class='min'>4 min</span></header>
+<div class='en'>Bible reading</div><div class='kind'>Jeremiah 52:6-20 read aloud word for word</div>
+<div class='lf'>Prep, not a target list: read or listen to Jeremias 52:6-20 in Portuguese in JW Library before Wednesday. Then just follow along.</div>
+<textarea id='note-3' data-field='note-3' rows='1' aria-label='Other words I caught in part 3' placeholder='Other words I caught here (optional)'></textarea></section>
+<section class='part'><header><h3>4. Iniciando conversas</h3><span class='min'>3 min</span></header>
+<div class='en'>Starting a conversation</div><div class='kind'>Demonstration · offering a Bible study</div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p4t0'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>estudo bíblico</div><div>Bible study</div><div class='say'>es-TOO-doo BEE-blee-koo</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p4t1'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>de casa em casa</div><div>house to house</div><div class='say'>djee KAH-zah en KAH-zah</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p4t2'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>Bom dia / Boa noite</div><div>Good morning / Good evening</div><div class='say'>bohn DJEE-ah / BOH-ah NOY-chee</div><div class='tip'>Very likely, but not printed in the workbook.</div></div></div>
+<textarea id='note-4' data-field='note-4' rows='1' aria-label='Other words I caught in part 4' placeholder='Other words I caught here (optional)'></textarea></section>
+<section class='part'><header><h3>5. Iniciando conversas</h3><span class='min'>4 min</span></header>
+<div class='en'>Starting a conversation</div><div class='kind'>Demonstration · householder objects that Jesus is God&#x27;s Son</div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p5t0'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>Filho de Deus</div><div>Son of God</div><div class='say'>FEE-lyoo djee DAY-oos</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p5t1'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>não concorda</div><div>doesn&#x27;t agree</div><div class='say'>nown kon-KOR-dah</div></div></div>
+<textarea id='note-5' data-field='note-5' rows='1' aria-label='Other words I caught in part 5' placeholder='Other words I caught here (optional)'></textarea></section>
+<section class='part'><header><h3>6. Discurso</h3><span class='min'>5 min</span></header>
+<div class='en'>Talk</div><div class='kind'>Theme: God&#x27;s Kingdom is a real government in heaven</div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p6t0'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>Reino de Deus</div><div>God&#x27;s Kingdom</div><div class='say'>HAY-noo djee DAY-oos</div><div class='tip'>Brazilian R at the start sounds like an English H.</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p6t1'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>governo</div><div>government</div><div class='say'>go-VEHR-noo</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p6t2'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>no céu</div><div>in heaven</div><div class='say'>noo SEH-oo</div></div></div>
+<textarea id='note-6' data-field='note-6' rows='1' aria-label='Other words I caught in part 6' placeholder='Other words I caught here (optional)'></textarea></section>
+<section class='part'><header><h3>7. Nossos donativos dão glória ao belo nome de Jeová</h3><span class='min'>15 min</span></header>
+<div class='en'>Our donations glorify God&#x27;s beautiful name</div><div class='kind'>Discussion by an elder + video + 3 audience questions</div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p7t0'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>donativos</div><div>donations</div><div class='say'>doh-nah-CHEE-voos</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p7t1'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>dar glória</div><div>to give glory</div><div class='say'>dar GLOH-ree-ah</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p7t2'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>projetos da organização</div><div>the organization&#x27;s projects</div><div class='say'>pro-ZHEH-toos dah or-gah-nee-zah-SOWN</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p7t3'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>atualizações</div><div>updates</div><div class='say'>ah-too-ah-lee-zah-SOINS</div></div></div>
+<textarea id='note-7' data-field='note-7' rows='1' aria-label='Other words I caught in part 7' placeholder='Other words I caught here (optional)'></textarea></section>
+<section class='part'><header><h3>8. Estudo bíblico de congregação</h3><span class='min'>30 min</span></header>
+<div class='en'>Congregation Bible Study</div><div class='kind'>wcg chapter 16 · Barak and Deborah: “I Will Certainly Go With You” · story, then discussion questions</div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t0'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>Baraque e Débora</div><div>Barak and Deborah</div><div class='say'>bah-RAH-kee ee DEH-boh-rah</div><div class='tip'>Names come up dozens of times. A warm-up.</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t1'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>Certamente irei com você</div><div>I will certainly go with you</div><div class='say'>ser-tah-MEN-chee ee-RAY kon voh-SEH</div><div class='tip'>The chapter title, and Deborah&#x27;s words in the story.</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t2'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>carros de guerra</div><div>war chariots</div><div class='say'>KAH-hoos djee GEH-hah</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t3'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>exército</div><div>army</div><div class='say'>eh-ZEHR-see-too</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t4'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>profetisa</div><div>prophetess</div><div class='say'>pro-feh-CHEE-zah</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t5'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>monte Tabor</div><div>Mount Tabor</div><div class='say'>MON-chee tah-BOR</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t6'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>coragem</div><div>courage <span class='en'>· corajosa = brave</span></div><div class='say'>koh-RAH-zhen</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t7'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>mãe em Israel</div><div>a mother in Israel</div><div class='say'>mahyn en eez-hah-EW</div></div></div>
+<div class='t' role='checkbox' tabindex='0' aria-checked='false' data-id='p8t8'><span class='box' aria-hidden='true'></span><div><div class='pt' lang='pt-BR'>as estrelas lutaram</div><div>the stars fought</div><div class='say'>ahs es-TREH-lahs loo-TAH-rown</div></div></div>
+<div class='lf'>Box question: “De que maneiras Baraque e Débora mostraram coragem?” (In what ways did Barak and Deborah show courage?) Catch one word of an answer.</div>
+<textarea id='note-8' data-field='note-8' rows='1' aria-label='Other words I caught in part 8' placeholder='Other words I caught here (optional)'></textarea></section>
+</div>
+<h2>After the meeting</h2><div class='card'>
+<p>Phrases caught tonight: <b class='caught'>0</b></p>
+<label for='f-understood'>One thing I understood (English is fine)</label><textarea id='f-understood' data-field='understood'></textarea>
+<label for='f-lookup'>Words I want to look up</label><textarea id='f-lookup' data-field='lookup'></textarea>
+<p class='note'>Over a few weeks, the trend below tells you more than any one meeting.</p></div>
+<h2 class='no-print'>Your weeks</h2><div class='card hist no-print'><div id='hist'></div>
+<div class='row'><button id='saveBackup' type='button'>Save a backup</button><button id='clear' type='button'>Clear this week</button></div>
+<p class='note' id='backupMsg' aria-live='polite'></p>
+<details id='backupBox'><summary>Backup text and restore</summary>
+<p class='note'>To restore, paste a backup here and choose Restore, or pick a backup file.</p>
+<textarea id='backupText' aria-label='Backup text'></textarea>
+<div class='row'><button id='copyBackup' type='button'>Copy</button><button id='restoreText' type='button'>Restore</button>
+<button type='button' onclick="document.getElementById('restoreFile').click()">Restore from file</button>
+<input id='restoreFile' type='file' accept='application/json,.json,.txt' hidden></div></details></div>
+<section class='page'><h2>Snapshot: words from this week</h2>
+<p class='note'>Not a test. Type what you think each word means and leave blanks blank. Then show the answers and mark the ones you knew. It's a starting point to compare with in a month.</p>
+<div class='row no-print'><button id='reveal' type='button'>Show answers</button><span>Words I knew: <b id='knewCount'>0</b> / 25</span></div>
+<table id='snap'>
+<tr><td class='w' lang='pt-BR'>1. dedicação<span class='ans' lang='en'>dedication</span></td><td><input type='text' id='guess-1' data-field='guess-1' aria-label='Meaning of dedicação'></td><td class='k no-print'><button class='knew' type='button' data-knew='1'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>2. promessa<span class='ans' lang='en'>promise</span></td><td><input type='text' id='guess-2' data-field='guess-2' aria-label='Meaning of promessa'></td><td class='k no-print'><button class='knew' type='button' data-knew='2'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>3. mensagem<span class='ans' lang='en'>message</span></td><td><input type='text' id='guess-3' data-field='guess-3' aria-label='Meaning of mensagem'></td><td class='k no-print'><button class='knew' type='button' data-knew='3'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>4. profecia<span class='ans' lang='en'>prophecy</span></td><td><input type='text' id='guess-4' data-field='guess-4' aria-label='Meaning of profecia'></td><td class='k no-print'><button class='knew' type='button' data-knew='4'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>5. governo<span class='ans' lang='en'>government</span></td><td><input type='text' id='guess-5' data-field='guess-5' aria-label='Meaning of governo'></td><td class='k no-print'><button class='knew' type='button' data-knew='5'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>6. organização<span class='ans' lang='en'>organization</span></td><td><input type='text' id='guess-6' data-field='guess-6' aria-label='Meaning of organização'></td><td class='k no-print'><button class='knew' type='button' data-knew='6'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>7. oportunidade<span class='ans' lang='en'>opportunity</span></td><td><input type='text' id='guess-7' data-field='guess-7' aria-label='Meaning of oportunidade'></td><td class='k no-print'><button class='knew' type='button' data-knew='7'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>8. consequências<span class='ans' lang='en'>consequences</span></td><td><input type='text' id='guess-8' data-field='guess-8' aria-label='Meaning of consequências'></td><td class='k no-print'><button class='knew' type='button' data-knew='8'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>9. exemplo<span class='ans' lang='en'>example</span></td><td><input type='text' id='guess-9' data-field='guess-9' aria-label='Meaning of exemplo'></td><td class='k no-print'><button class='knew' type='button' data-knew='9'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>10. espiritual<span class='ans' lang='en'>spiritual</span></td><td><input type='text' id='guess-10' data-field='guess-10' aria-label='Meaning of espiritual'></td><td class='k no-print'><button class='knew' type='button' data-knew='10'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>11. coragem<span class='ans' lang='en'>courage</span></td><td><input type='text' id='guess-11' data-field='guess-11' aria-label='Meaning of coragem'></td><td class='k no-print'><button class='knew' type='button' data-knew='11'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>12. exército<span class='ans' lang='en'>army</span></td><td><input type='text' id='guess-12' data-field='guess-12' aria-label='Meaning of exército'></td><td class='k no-print'><button class='knew' type='button' data-knew='12'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>13. rei<span class='ans' lang='en'>king</span></td><td><input type='text' id='guess-13' data-field='guess-13' aria-label='Meaning of rei'></td><td class='k no-print'><button class='knew' type='button' data-knew='13'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>14. reino<span class='ans' lang='en'>kingdom</span></td><td><input type='text' id='guess-14' data-field='guess-14' aria-label='Meaning of reino'></td><td class='k no-print'><button class='knew' type='button' data-knew='14'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>15. céu<span class='ans' lang='en'>heaven, sky</span></td><td><input type='text' id='guess-15' data-field='guess-15' aria-label='Meaning of céu'></td><td class='k no-print'><button class='knew' type='button' data-knew='15'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>16. vida<span class='ans' lang='en'>life</span></td><td><input type='text' id='guess-16' data-field='guess-16' aria-label='Meaning of vida'></td><td class='k no-print'><button class='knew' type='button' data-knew='16'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>17. palavra<span class='ans' lang='en'>word</span></td><td><input type='text' id='guess-17' data-field='guess-17' aria-label='Meaning of palavra'></td><td class='k no-print'><button class='knew' type='button' data-knew='17'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>18. verdade<span class='ans' lang='en'>truth</span></td><td><input type='text' id='guess-18' data-field='guess-18' aria-label='Meaning of verdade'></td><td class='k no-print'><button class='knew' type='button' data-knew='18'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>19. nome<span class='ans' lang='en'>name</span></td><td><input type='text' id='guess-19' data-field='guess-19' aria-label='Meaning of nome'></td><td class='k no-print'><button class='knew' type='button' data-knew='19'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>20. filho<span class='ans' lang='en'>son</span></td><td><input type='text' id='guess-20' data-field='guess-20' aria-label='Meaning of filho'></td><td class='k no-print'><button class='knew' type='button' data-knew='20'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>21. povo<span class='ans' lang='en'>people</span></td><td><input type='text' id='guess-21' data-field='guess-21' aria-label='Meaning of povo'></td><td class='k no-print'><button class='knew' type='button' data-knew='21'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>22. juramento<span class='ans' lang='en'>oath</span></td><td><input type='text' id='guess-22' data-field='guess-22' aria-label='Meaning of juramento'></td><td class='k no-print'><button class='knew' type='button' data-knew='22'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>23. cumprir<span class='ans' lang='en'>to fulfill, keep (a promise)</span></td><td><input type='text' id='guess-23' data-field='guess-23' aria-label='Meaning of cumprir'></td><td class='k no-print'><button class='knew' type='button' data-knew='23'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>24. vingança<span class='ans' lang='en'>vengeance</span></td><td><input type='text' id='guess-24' data-field='guess-24' aria-label='Meaning of vingança'></td><td class='k no-print'><button class='knew' type='button' data-knew='24'>Knew it</button></td></tr>
+<tr><td class='w' lang='pt-BR'>25. morador<span class='ans' lang='en'>householder, resident</span></td><td><input type='text' id='guess-25' data-field='guess-25' aria-label='Meaning of morador'></td><td class='k no-print'><button class='knew' type='button' data-knew='25'>Knew it</button></td></tr>
+</table><p class='print-only'>Words I knew: ____ / 25</p></section>
+<section class='page print-only'><h2>Snapshot answers</h2><div class='grid2'><table><tr><td class='w'>1. dedicação</td><td>dedication</td></tr><tr><td class='w'>2. promessa</td><td>promise</td></tr><tr><td class='w'>3. mensagem</td><td>message</td></tr><tr><td class='w'>4. profecia</td><td>prophecy</td></tr><tr><td class='w'>5. governo</td><td>government</td></tr><tr><td class='w'>6. organização</td><td>organization</td></tr><tr><td class='w'>7. oportunidade</td><td>opportunity</td></tr><tr><td class='w'>8. consequências</td><td>consequences</td></tr><tr><td class='w'>9. exemplo</td><td>example</td></tr><tr><td class='w'>10. espiritual</td><td>spiritual</td></tr><tr><td class='w'>11. coragem</td><td>courage</td></tr><tr><td class='w'>12. exército</td><td>army</td></tr><tr><td class='w'>13. rei</td><td>king</td></tr></table><table><tr><td class='w'>14. reino</td><td>kingdom</td></tr><tr><td class='w'>15. céu</td><td>heaven, sky</td></tr><tr><td class='w'>16. vida</td><td>life</td></tr><tr><td class='w'>17. palavra</td><td>word</td></tr><tr><td class='w'>18. verdade</td><td>truth</td></tr><tr><td class='w'>19. nome</td><td>name</td></tr><tr><td class='w'>20. filho</td><td>son</td></tr><tr><td class='w'>21. povo</td><td>people</td></tr><tr><td class='w'>22. juramento</td><td>oath</td></tr><tr><td class='w'>23. cumprir</td><td>to fulfill, keep (a promise)</td></tr><tr><td class='w'>24. vingança</td><td>vengeance</td></tr><tr><td class='w'>25. morador</td><td>householder, resident</td></tr></table></div></section>
+<p class='note'>Sound hints are approximate Brazilian Portuguese. Speakers from other regions will sound different.</p></main><script>const DATA={"id": "2026-11-11-midweek", "label": "November 11", "baselineTotal": 25};
+const KEY = 'listening-tracker-v1';
+const CUR = DATA.id;
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const blank = () => ({checks: {}, fields: {}, knew: {}});
+
+// ---- state, cached in this browser when allowed ----
+let local = true, db = {weeks: {}};
+try {
+  localStorage.setItem(KEY + ':t', '1'); localStorage.removeItem(KEY + ':t');
+  const raw = localStorage.getItem(KEY); if (raw) db = JSON.parse(raw);
+} catch (e) { local = false; }
+if (!db || typeof db !== 'object' || !db.weeks) db = {weeks: {}};
+let st = (db.weeks[CUR] && db.weeks[CUR].state) || blank();
+
+const caught = () => Object.values(st.checks).filter(Boolean).length;
+const knew = () => Object.values(st.knew).filter(Boolean).length;
+
+function mergeWeeks(incoming) {
+  let changed = false;
+  for (const [id, w] of Object.entries(incoming || {})) {
+    if (!w || typeof w !== 'object') continue;
+    const mine = db.weeks[id];
+    if (!mine || (w.updated || '') > (mine.updated || '')) { db.weeks[id] = w; changed = true; }
+  }
+  st = (db.weeks[CUR] && db.weeks[CUR].state) || blank();
+  return changed;
+}
+
+// ---- private record in the viewer's account (claude.ai artifact only) ----
+let remote = null, remoteState = 'none', busy = false, again = false, lastSent = '';
+async function pushRemote() {
+  if (!remote) return;
+  const body = JSON.stringify(db.weeks);
+  if (body === lastSent) return;
+  if (busy) { again = true; return; }
+  busy = true;
+  try { await remote.set({weeks: db.weeks}); lastSent = body; remoteState = 'ok'; }
+  catch (e) {
+    if (e && e.code === 'unavailable') { again = true; await new Promise(r => setTimeout(r, 1500 + Math.random() * 1500)); }
+    else { remote = null; remoteState = 'refused'; }
+  } finally {
+    busy = false; showStatus();
+    if (again && remote) { again = false; pushRemote(); }
+  }
+}
+async function connect() {
+  const c = window.claude; if (!c || !c.use) return;
+  try {
+    const [store, user] = await Promise.all([c.use('db'), c.use('user')]);
+    if (!store || !user) return;
+    const uid = await user.id(); if (!uid) return;
+    const ref = store.doc('data/users/' + uid + '/tracker');
+    remoteState = 'connecting'; showStatus();
+    const snap = await Promise.race([ref.get(), new Promise((_, no) => setTimeout(() => no({code: 'timeout'}), 10000))]);
+    const theirs = snap.exists ? (snap.data().weeks || {}) : {};
+    lastSent = JSON.stringify(theirs);
+    mergeWeeks(theirs);
+    remote = ref; remoteState = 'ok';
+    saveLocal(); paint(); pushRemote(); showStatus();
+  } catch (e) { remoteState = (e && e.code === 'timeout') ? 'offline' : 'none'; showStatus(); }
+}
+
+function saveLocal() {
+  if (!local) return;
+  try { localStorage.setItem(KEY, JSON.stringify(db)); } catch (e) { local = false; }
+}
+function showStatus() {
+  const s = remote && remoteState === 'ok' ? 'Saved to your account'
+    : remoteState === 'connecting' ? 'Connecting to your account…'
+    : local ? (remoteState === 'offline' ? 'Saved on this device (account not reachable yet)'
+              : remoteState === 'refused' ? 'Saved on this device only' : 'Saved on this device')
+    : 'Not saving here: save a backup below';
+  $('#status').textContent = s;
+}
+function persist() {
+  db.weeks[CUR] = {label: DATA.label, caught: caught(), knew: knew(), baselineTotal: DATA.baselineTotal,
+                   state: st, updated: new Date().toISOString()};
+  saveLocal(); pushRemote(); showStatus(); paint();
+}
+let timer; function persistSoon() { clearTimeout(timer); timer = setTimeout(persist, 600); }
+
+// ---- rendering ----
+function paint() {
+  $$('.t').forEach(el => el.setAttribute('aria-checked', String(!!st.checks[el.dataset.id])));
+  $$('[data-field]').forEach(el => { if (document.activeElement !== el) el.value = st.fields[el.dataset.field] || ''; });
+  $$('button.knew').forEach(b => { const on = !!st.knew[b.dataset.knew]; b.classList.toggle('on', on); b.textContent = on ? 'Knew it ✓' : 'Knew it'; b.setAttribute('aria-pressed', String(on)); });
+  $$('.caught').forEach(e => e.textContent = caught());
+  $('#knewCount').textContent = knew();
+  const weeks = Object.entries(db.weeks).sort((a, b) => a[0].localeCompare(b[0]));
+  const max = Math.max(1, ...weeks.map(([, w]) => w.caught || 0));
+  const hist = $('#hist'); hist.textContent = '';
+  if (!weeks.length) { hist.innerHTML = '<p class="note">Each meeting you use this for appears here.</p>'; return; }
+  for (const [id, w] of weeks) {
+    const row = document.createElement('div'); row.className = 'h' + (id === CUR ? ' now' : '');
+    const a = document.createElement('span'); a.textContent = w.label || id;
+    const t = document.createElement('span'); t.className = 'track';
+    const f = document.createElement('span'); f.className = 'fill'; f.style.width = (100 * (w.caught || 0) / max).toFixed(0) + '%'; t.append(f);
+    const n = document.createElement('span'); n.textContent = (w.caught || 0) + ' caught' + (w.knew ? ' · ' + w.knew + ' known' : '');
+    row.append(a, t, n); hist.append(row);
+  }
+}
+
+// ---- interactions ----
+$$('.t').forEach(el => {
+  const toggle = () => { st.checks[el.dataset.id] = !st.checks[el.dataset.id]; persist(); };
+  el.addEventListener('click', toggle);
+  el.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggle(); } });
+});
+$$('[data-field]').forEach(el => el.addEventListener('input', () => { st.fields[el.dataset.field] = el.value; persistSoon(); }));
+$$('button.knew').forEach(b => b.addEventListener('click', () => { st.knew[b.dataset.knew] = !st.knew[b.dataset.knew]; persist(); }));
+$('#reveal').addEventListener('click', e => { const on = $('#snap').classList.toggle('reveal'); e.target.textContent = on ? 'Hide answers' : 'Show answers'; });
+
+const backupName = () => 'listening-tracker-' + new Date().toISOString().slice(0, 10) + '.json';
+$('#saveBackup').addEventListener('click', async () => {
+  persist();
+  const text = JSON.stringify(db, null, 1);
+  $('#backupText').value = text;
+  const c = window.claude;
+  const dl = c && c.use ? await c.use('downloads').catch(() => null) : null;
+  if (dl) {
+    try { await dl.save({filename: backupName(), data: text}); $('#backupMsg').textContent = 'Backup saved.'; return; }
+    catch (e) { if (e && e.code === 'declined') { $('#backupMsg').textContent = 'Not saved. The backup text is below if you want to copy it.'; $('#backupBox').open = true; return; } }
+  }
+  if (!c) {   // a plain HTML file opened in a browser
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], {type: 'application/json'}));
+    a.download = backupName(); document.body.append(a); a.click(); a.remove();
+    $('#backupMsg').textContent = 'Backup file downloaded.'; return;
+  }
+  $('#backupBox').open = true; $('#backupMsg').textContent = 'Copy the backup text below and keep it somewhere safe.';
+});
+$('#copyBackup').addEventListener('click', () => {
+  const ta = $('#backupText'); if (!ta.value) ta.value = JSON.stringify(db, null, 1);
+  const done = () => $('#backupMsg').textContent = 'Copied.';
+  const fallback = () => { ta.focus(); ta.select(); $('#backupMsg').textContent = 'Selected. Copy it with your device’s Copy command.'; };
+  try { navigator.clipboard.writeText(ta.value).then(done, fallback); } catch (e) { fallback(); }
+});
+function restoreFrom(text) {
+  try {
+    const inc = JSON.parse(text);
+    const n = Object.keys(inc.weeks || {}).length;
+    mergeWeeks(inc.weeks); saveLocal(); pushRemote(); paint(); showStatus();
+    $('#backupMsg').textContent = 'Restored ' + n + (n === 1 ? ' week.' : ' weeks.');
+  } catch (e) { $('#backupMsg').textContent = 'That backup could not be read. Check that it was copied in full.'; }
+}
+$('#restoreText').addEventListener('click', () => restoreFrom($('#backupText').value));
+$('#restoreFile').addEventListener('change', async e => { const f = e.target.files[0]; if (f) restoreFrom(await f.text()); e.target.value = ''; });
+let armed = false;
+$('#clear').addEventListener('click', e => {
+  if (!armed) { armed = true; e.target.textContent = 'Tap again to clear this week'; setTimeout(() => { armed = false; e.target.textContent = 'Clear this week'; }, 3000); return; }
+  st = blank(); armed = false; e.target.textContent = 'Clear this week'; persist();
+});
+
+paint(); showStatus(); connect();
+</script></body></html>
