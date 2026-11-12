@@ -37,6 +37,12 @@ h2{font-size:1.2rem;font-weight:800;margin:28px 0 8px}
 .weeknav{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:10px 2px 0;font-weight:700;font-size:.9rem}
 .weeknav a{color:var(--strong);text-decoration:none;padding:6px 2px} .weeknav a:hover{text-decoration:underline}
 .weeknav a:focus-visible{outline:3px solid var(--amber);outline-offset:2px;border-radius:4px}
+.settings{margin:10px 0 0;padding:8px 14px} .settings summary{font:700 .9rem var(--body);color:var(--muted)}
+.settings summary b{color:var(--strong)} .settings[open] summary{margin-bottom:6px}
+.settings .ask{font:800 1.05rem var(--head);margin:4px 0}
+.settings .check{display:flex;gap:8px;align-items:center;margin:10px 0 0;font-weight:700}
+.settings .check input{width:20px;height:20px;accent-color:var(--strong)}
+.settings select{font:inherit;color:var(--ink);background:var(--field);border:1.5px solid var(--strong);border-radius:9px;padding:7px 10px;flex:1;min-width:0}
 .bar{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0}
 .badge{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:.85rem;display:inline-flex;gap:6px;align-items:center}
 .badge i{width:9px;height:9px;border-radius:50%;background:var(--amber);display:inline-block}
@@ -131,7 +137,7 @@ details{margin-top:10px} summary{cursor:pointer;color:var(--strong);font:800 1re
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 @media print{
  html{font-size:10.5px} body{background:#fff;color:#000;font-size:10.5px} main{padding:0;max-width:none}
- .bar,.weeknav,.no-print,button,details,.views,#focusView{display:none!important} #sheetView{display:block!important} .print-only{display:block}
+ .bar,.weeknav,.settings,.no-print,button,details,.views,#focusView{display:none!important} #sheetView{display:block!important} .print-only{display:block}
  .mlog{background:#fff;color:#000;border:1px solid #999;padding:6px 10px} .ring{display:none}
  h2{font-size:13px;margin:10px 0 4px}
  .card{padding:4px 10px;box-shadow:none} .how ol{margin:2px 0}
@@ -141,8 +147,24 @@ details{margin-top:10px} summary{cursor:pointer;color:var(--strong);font:800 1re
  textarea,input[type=text]{border:0;border-bottom:1px solid #999;border-radius:0;min-height:0;height:18px;padding:0;resize:none;background:none}
  .part textarea,.ans{display:none!important} td{padding:3px 4px} .grid2{display:grid;grid-template-columns:1fr 1fr;column-gap:24px}
 }
-</style><link rel='manifest' href='manifest.webmanifest'><meta name='theme-color' content='#1b2b44'><link rel='apple-touch-icon' href='icons/apple-touch-icon.png'><meta name='apple-mobile-web-app-capable' content='yes'><meta name='mobile-web-app-capable' content='yes'><meta name='apple-mobile-web-app-title' content='Mission Log'><meta name='apple-mobile-web-app-status-bar-style' content='default'></head><body><main><header class='mlog'><div><div class='label'>Mission log · Wednesday, December 16</div><h1>Midweek meeting</h1><div class='wk'>14 a 20 de dezembro · Ezequiel 5 a 6</div></div><div class='ring' role='img' aria-label='Phrases found tonight'><svg viewBox='0 0 36 36' aria-hidden='true'><circle class='bg' cx='18' cy='18' r='15'/><circle id='ringArc' class='arc' cx='18' cy='18' r='15' stroke-dasharray='94.25' stroke-dashoffset='94.25'/></svg><b class='caught'>0</b><small>found</small></div></header>
-<nav class='weeknav' aria-label='Weeks'><a href='2026-12-09.html' rel='prev'>‹ Dec 9</a><a href='index.html?list'>All weeks</a><a href='2026-12-23.html' rel='next'>Dec 23 ›</a></nav>
+</style><script>
+window.__analytics = true;
+(function () {
+  var off = false; try { off = localStorage.getItem('listening-tracker-v1:noCount') === '1'; } catch (e) {}
+  if (off) return;
+  var s = document.createElement('script'); s.async = true; s.src = 'https://gc.zgo.at/count.js';
+  s.setAttribute('data-goatcounter', 'https://rvarzea.goatcounter.com/count');
+  document.head.appendChild(s);
+  window.__track = function (name) {
+    if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({path: 'mission-log/' + name, title: 'Mission Log: ' + name, event: true});
+  };
+  var standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+  if (standalone) addEventListener('load', function () { setTimeout(function () { window.__track('opened-as-app'); }, 1500); });
+  addEventListener('appinstalled', function () { window.__track('app-installed'); });
+})();
+</script><link rel='manifest' href='manifest.webmanifest'><meta name='theme-color' content='#1b2b44'><link rel='apple-touch-icon' href='icons/apple-touch-icon.png'><meta name='apple-mobile-web-app-capable' content='yes'><meta name='mobile-web-app-capable' content='yes'><meta name='apple-mobile-web-app-title' content='Mission Log'><meta name='apple-mobile-web-app-status-bar-style' content='default'></head><body><main><header class='mlog'><div><div class='label'>Mission log · <span data-monday='2026-12-14'>Wednesday, December 16</span></div><h1>Midweek meeting</h1><div class='wk'>14 a 20 de dezembro · Ezequiel 5 a 6</div></div><div class='ring' role='img' aria-label='Phrases found tonight'><svg viewBox='0 0 36 36' aria-hidden='true'><circle class='bg' cx='18' cy='18' r='15'/><circle id='ringArc' class='arc' cx='18' cy='18' r='15' stroke-dasharray='94.25' stroke-dashoffset='94.25'/></svg><b class='caught'>0</b><small>found</small></div></header>
+<nav class='weeknav' aria-label='Weeks'><a href='2026-12-09.html' rel='prev'>‹ <span data-monday='2026-12-07' data-fmt='short'>Dec 9</span></a><a href='index.html?list'>All weeks</a><a href='2026-12-23.html' rel='next'><span data-monday='2026-12-21' data-fmt='short'>Dec 23</span> ›</a></nav>
+<details class='card settings' id='settings'><summary><span id='setSummary'>Meeting day: <b id='dayName'>Wednesday</b></span></summary><p id='setAsk' class='ask' hidden>Which day is your midweek meeting?</p><label for='meetDay'>Your midweek meeting day</label><div class='row'><select id='meetDay'><option value='0'>Monday</option><option value='1'>Tuesday</option><option value='2' selected>Wednesday</option><option value='3'>Thursday</option><option value='4'>Friday</option><option value='5'>Saturday</option><option value='6'>Sunday</option></select><button id='setDone' class='primary' type='button'>Save</button></div><p class='note'>Dates follow this day, and the app opens on the week of your next meeting. Saved on this device.</p><div id='countRow' hidden><label class='check'><input type='checkbox' id='countMe' checked> Count my visits anonymously</label><p class='note'>Only page visits and which buttons get used are counted, with no names and no cookies. What you tick and type stays on this device. Changes apply the next time a page opens.</p></div></details>
 <div class='bar'><span class='badge'><i aria-hidden='true'></i><span><b id='monthCount'>0</b> found this month</span></span><small id='status' role='status'></small></div>
 <div class='views' role='group' aria-label='View'><button type='button' data-view='focus' aria-pressed='true'>Focus</button><button type='button' data-view='sheet'>Full sheet</button></div>
 <div id='focusView'>
@@ -389,11 +411,46 @@ details{margin-top:10px} summary{cursor:pointer;color:var(--strong);font:800 1re
 <tr><td class='w' lang='pt-BR'>25. gananciosos<span class='ans' lang='en'>greedy</span></td><td><input type='text' id='guess-25' data-field='guess-25' aria-label='Meaning of gananciosos'></td><td class='k no-print'><button class='knew' type='button' data-knew='25'>Knew it</button></td></tr>
 </table><p class='print-only'>Words I knew: ____ / 25</p></section>
 <section class='page print-only'><h2>Snapshot answers</h2><div class='grid2'><table><tr><td class='w'>1. ídolos</td><td>idols</td></tr><tr><td class='w'>2. profeta</td><td>prophet</td></tr><tr><td class='w'>3. espiritual</td><td>spiritual</td></tr><tr><td class='w'>4. calamidade</td><td>calamity</td></tr><tr><td class='w'>5. imoralidade</td><td>immorality</td></tr><tr><td class='w'>6. adoração</td><td>worship</td></tr><tr><td class='w'>7. julgamento</td><td>judgment</td></tr><tr><td class='w'>8. tabernáculo</td><td>tabernacle</td></tr><tr><td class='w'>9. exclusiva</td><td>exclusive</td></tr><tr><td class='w'>10. cerimônias</td><td>ceremonies</td></tr><tr><td class='w'>11. destruição</td><td>destruction</td></tr><tr><td class='w'>12. compaixão</td><td>compassion</td></tr><tr><td class='w'>13. casa</td><td>house, home</td></tr></table><table><tr><td class='w'>14. noite</td><td>night</td></tr><tr><td class='w'>15. menino</td><td>boy</td></tr><tr><td class='w'>16. voz</td><td>voice</td></tr><tr><td class='w'>17. medo</td><td>fear</td></tr><tr><td class='w'>18. olho</td><td>eye</td></tr><tr><td class='w'>19. cabeça</td><td>head</td></tr><tr><td class='w'>20. vida</td><td>life</td></tr><tr><td class='w'>21. pais</td><td>parents</td></tr><tr><td class='w'>22. navalha</td><td>razor</td></tr><tr><td class='w'>23. balança</td><td>scale (for weighing)</td></tr><tr><td class='w'>24. cativos</td><td>captives</td></tr><tr><td class='w'>25. gananciosos</td><td>greedy</td></tr></table></div></section>
-<p class='note'>Sound hints are approximate Brazilian Portuguese. Speakers from other regions will sound different.</p></div></main><script>const DATA={"id": "2026-12-16-midweek", "label": "December 16", "baselineTotal": 25, "timeline": [{"min": 5, "label": "Song and prayer"}, {"min": 1, "label": "Opening comments"}, {"min": 10, "label": "Idolaters Break Jehovah’s Heart"}, {"min": 10, "label": "Spiritual gems"}, {"min": 5, "label": "Bible reading"}, {"min": 4, "label": "Starting a conversation"}, {"min": 5, "label": "Following up"}, {"min": 6, "label": "What would you say?"}, {"min": 4, "label": "Song"}, {"min": 15, "label": "Why Refrain From Nationalistic Ceremonies?"}, {"min": 12, "label": "Congregation Bible Study · The account"}, {"min": 18, "label": "Congregation Bible Study · Discussion questions"}, {"min": 8, "label": "Closing comments, song and prayer"}]};
+<p class='note'>Sound hints are approximate Brazilian Portuguese. Speakers from other regions will sound different.</p></div></main><script>const DATA={"id": "2026-12-16-midweek", "label": "December 16", "baselineTotal": 25, "monday": "2026-12-14", "timeline": [{"min": 5, "label": "Song and prayer"}, {"min": 1, "label": "Opening comments"}, {"min": 10, "label": "Idolaters Break Jehovah’s Heart"}, {"min": 10, "label": "Spiritual gems"}, {"min": 5, "label": "Bible reading"}, {"min": 4, "label": "Starting a conversation"}, {"min": 5, "label": "Following up"}, {"min": 6, "label": "What would you say?"}, {"min": 4, "label": "Song"}, {"min": 15, "label": "Why Refrain From Nationalistic Ceremonies?"}, {"min": 12, "label": "Congregation Bible Study · The account"}, {"min": 18, "label": "Congregation Bible Study · Discussion questions"}, {"min": 8, "label": "Closing comments, song and prayer"}]};
+const SKEY = 'listening-tracker-v1:settings';
+function savedDay() { try { const s = JSON.parse(localStorage.getItem(SKEY) || '{}'); return Number.isInteger(s.day) ? s.day : null; } catch (e) { return null; } }
+function storeDay(d) { try { localStorage.setItem(SKEY, JSON.stringify({day: d})); } catch (e) {} }
+const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], DEFAULT_DAY = 2;
+let meetDay = savedDay(); const daySet = meetDay !== null; if (!daySet) meetDay = DEFAULT_DAY;
+function meetDate(monday, day) { const [y, m, d] = monday.split('-').map(Number); return new Date(y, m - 1, d + day); }
+function isoDate(dt) { const p = n => String(n).padStart(2, '0'); return dt.getFullYear() + '-' + p(dt.getMonth() + 1) + '-' + p(dt.getDate()); }
+const fmt = {long: {weekday: 'long', month: 'long', day: 'numeric'}, short: {month: 'short', day: 'numeric'}, md: {month: 'long', day: 'numeric'}};
+function relabel() {
+  document.querySelectorAll('[data-monday]').forEach(el => {
+    el.textContent = meetDate(el.dataset.monday, meetDay).toLocaleDateString('en-US', fmt[el.dataset.fmt || 'long']);
+  });
+  const n = document.getElementById('dayName'); if (n) n.textContent = DAYS[meetDay];
+  const sel = document.getElementById('meetDay'); if (sel) sel.value = String(meetDay);
+}
+function setupSettings(onChange) {
+  const box = document.getElementById('settings'); if (!box) return;
+  if (!daySet) { box.open = true; document.getElementById('setAsk').hidden = false; }
+  const apply = () => { meetDay = +document.getElementById('meetDay').value; storeDay(meetDay); relabel(); if (onChange) onChange(); };
+  document.getElementById('meetDay').addEventListener('change', apply);
+  document.getElementById('setDone').addEventListener('click', () => {
+    apply(); box.open = false; document.getElementById('setAsk').hidden = true;
+    try { if (window.__track) window.__track('meeting-day-' + DAYS[meetDay].toLowerCase()); } catch (e) {}
+  });
+  const cm = document.getElementById('countMe');
+  if (window.__analytics && cm) {
+    document.getElementById('countRow').hidden = false;
+    try { cm.checked = localStorage.getItem('listening-tracker-v1:noCount') !== '1'; } catch (e) {}
+    cm.addEventListener('change', () => { try { localStorage.setItem('listening-tracker-v1:noCount', cm.checked ? '0' : '1'); } catch (e) {} });
+  }
+}
+relabel();
+
 const KEY = 'listening-tracker-v1';
 const CUR = DATA.id;
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 const blank = () => ({checks: {}, fields: {}, knew: {}});
+// anonymous feature counts (only when the site was built with analytics and the person hasn't opted out)
+const track = name => { try { if (window.__track) window.__track(name); } catch (e) {} };
 
 // ---- state, cached in this browser when allowed ----
 let local = true, db = {weeks: {}};
@@ -491,7 +548,7 @@ function paint() {
   if (!weeks.length) { hist.innerHTML = '<p class="note">Each meeting you use this for appears here.</p>'; return; }
   for (const [id, w] of weeks) {
     const row = document.createElement('div'); row.className = 'h' + (id === CUR ? ' now' : '');
-    const a = document.createElement('span'); a.textContent = w.label || id;
+    const a = document.createElement('span'); a.textContent = weekLabel(id, w);
     const t = document.createElement('span'); t.className = 'track';
     const f = document.createElement('span'); f.className = 'fill'; f.style.width = (100 * (w.caught || 0) / max).toFixed(0) + '%'; t.append(f);
     const n = document.createElement('span'); n.textContent = (w.caught || 0) + ' caught' + (w.knew ? ' · ' + w.knew + ' known' : '');
@@ -499,18 +556,26 @@ function paint() {
   }
 }
 
+// history labels follow the chosen meeting day (ids are the Wednesday date of each week)
+function weekLabel(id, w) {
+  const m = /^(\d{4})-(\d\d)-(\d\d)-midweek$/.exec(id);
+  if (!m) return (w && w.label) || id;
+  const d = new Date(+m[1], +m[2] - 1, +m[3]); d.setDate(d.getDate() - (d.getDay() + 6) % 7);
+  return meetDate(isoDate(d), meetDay).toLocaleDateString('en-US', {month: 'long', day: 'numeric'});
+}
 // ---- interactions ----
 $$('.t').forEach(el => {
-  const toggle = () => { st.checks[el.dataset.id] = !st.checks[el.dataset.id]; persist(); };
+  const toggle = () => { st.checks[el.dataset.id] = !st.checks[el.dataset.id]; if (st.checks[el.dataset.id]) track('phrase-found'); persist(); };
   el.addEventListener('click', toggle);
   el.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggle(); } });
 });
 $$('[data-field]').forEach(el => el.addEventListener('input', () => { st.fields[el.dataset.field] = el.value; persistSoon(); }));
 $$('button.knew').forEach(b => b.addEventListener('click', () => { st.knew[b.dataset.knew] = !st.knew[b.dataset.knew]; persist(); }));
-$('#reveal').addEventListener('click', e => { const on = $('#snap').classList.toggle('reveal'); e.target.textContent = on ? 'Hide answers' : 'Show answers'; });
+$('#reveal').addEventListener('click', e => { const on = $('#snap').classList.toggle('reveal'); if (on) track('snapshot-answers'); e.target.textContent = on ? 'Hide answers' : 'Show answers'; });
 
 const backupName = () => 'listening-tracker-' + new Date().toISOString().slice(0, 10) + '.json';
 $('#saveBackup').addEventListener('click', async () => {
+  track('backup-saved');
   persist();
   const text = JSON.stringify(db, null, 1);
   $('#backupText').value = text;
@@ -571,7 +636,7 @@ function show(i) {
   paintFocus();
 }
 function setView(v, remember) {
-  ui.view = v; if (remember) saveUi();
+  ui.view = v; if (remember) { saveUi(); track('view-' + v); }
   $('#sheetView').hidden = v !== 'sheet'; $('#focusView').hidden = v !== 'focus';
   $$('.views button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === v)));
   if (v === 'focus') { const e = estIndex(); show(e === null ? shown : e); }
@@ -611,10 +676,10 @@ function setPhrases(v, remember) {
   paintFocus();
 }
 const revealed = id => !!(st.shown && st.shown[id]);
-function reveal(id) { st.shown = st.shown || {}; st.shown[id] = true; persist(); }
+function reveal(id) { st.shown = st.shown || {}; if (!st.shown[id]) track('meaning-checked'); st.shown[id] = true; persist(); }
 
 $$('.views button').forEach(b => b.addEventListener('click', () => setView(b.dataset.view, true)));
-$('#startBtn').addEventListener('click', () => { const now = Date.now(); st.clock = {idx: 0, at: now, start: now}; $('#prepBox').open = false; persist(); show(0); });
+$('#startBtn').addEventListener('click', () => { const now = Date.now(); st.clock = {idx: 0, at: now, start: now}; $('#prepBox').open = false; persist(); show(0); track('meeting-started'); });
 $$('.here').forEach(b => b.addEventListener('click', () => { st.clock = {idx: +b.dataset.k, at: Date.now(), start: st.clock ? st.clock.start || null : null}; persist(); }));
 $('#whereBtn').addEventListener('click', () => {
   const e = estIndex();
@@ -660,11 +725,13 @@ $$('.hear').forEach(b => {
     ev.stopPropagation(); if (!ptVoice) return;
     speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(b.dataset.say); u.voice = ptVoice; u.lang = ptVoice.lang; u.rate = 0.85;
-    speechSynthesis.speak(u);
+    speechSynthesis.speak(u); track('hear-played');
   });
   b.addEventListener('keydown', ev => ev.stopPropagation());
 });
 
+if (DATA.monday) DATA.label = meetDate(DATA.monday, meetDay).toLocaleDateString('en-US', {month: 'long', day: 'numeric'});
+setupSettings(() => { if (DATA.monday) DATA.label = meetDate(DATA.monday, meetDay).toLocaleDateString('en-US', {month: 'long', day: 'numeric'}); paint(); });
 paint(); showStatus(); connect();
 setPhrases(ui.phrases); setView(ui.view);
 if (st.clock) $('#prepBox').open = false;

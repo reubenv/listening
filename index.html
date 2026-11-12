@@ -37,6 +37,12 @@ h2{font-size:1.2rem;font-weight:800;margin:28px 0 8px}
 .weeknav{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:10px 2px 0;font-weight:700;font-size:.9rem}
 .weeknav a{color:var(--strong);text-decoration:none;padding:6px 2px} .weeknav a:hover{text-decoration:underline}
 .weeknav a:focus-visible{outline:3px solid var(--amber);outline-offset:2px;border-radius:4px}
+.settings{margin:10px 0 0;padding:8px 14px} .settings summary{font:700 .9rem var(--body);color:var(--muted)}
+.settings summary b{color:var(--strong)} .settings[open] summary{margin-bottom:6px}
+.settings .ask{font:800 1.05rem var(--head);margin:4px 0}
+.settings .check{display:flex;gap:8px;align-items:center;margin:10px 0 0;font-weight:700}
+.settings .check input{width:20px;height:20px;accent-color:var(--strong)}
+.settings select{font:inherit;color:var(--ink);background:var(--field);border:1.5px solid var(--strong);border-radius:9px;padding:7px 10px;flex:1;min-width:0}
 .bar{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0}
 .badge{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:.85rem;display:inline-flex;gap:6px;align-items:center}
 .badge i{width:9px;height:9px;border-radius:50%;background:var(--amber);display:inline-block}
@@ -131,7 +137,7 @@ details{margin-top:10px} summary{cursor:pointer;color:var(--strong);font:800 1re
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 @media print{
  html{font-size:10.5px} body{background:#fff;color:#000;font-size:10.5px} main{padding:0;max-width:none}
- .bar,.weeknav,.no-print,button,details,.views,#focusView{display:none!important} #sheetView{display:block!important} .print-only{display:block}
+ .bar,.weeknav,.settings,.no-print,button,details,.views,#focusView{display:none!important} #sheetView{display:block!important} .print-only{display:block}
  .mlog{background:#fff;color:#000;border:1px solid #999;padding:6px 10px} .ring{display:none}
  h2{font-size:13px;margin:10px 0 4px}
  .card{padding:4px 10px;box-shadow:none} .how ol{margin:2px 0}
@@ -149,18 +155,73 @@ details{margin-top:10px} summary{cursor:pointer;color:var(--strong);font:800 1re
 .weeks .c{grid-row:1/3;grid-column:2;align-self:center;color:var(--green);font-weight:700;font-size:.9rem}
 .install{margin:12px 0} .install .note{margin:4px 0 8px}
 .weeks a.now{border:2px solid var(--amber)} .weeks a.now .d::before{content:"This week";display:block;color:var(--amber);font:700 .72rem var(--body);letter-spacing:.12em;text-transform:uppercase}
-</style><link rel='manifest' href='manifest.webmanifest'><meta name='theme-color' content='#1b2b44'><link rel='apple-touch-icon' href='icons/apple-touch-icon.png'><meta name='apple-mobile-web-app-capable' content='yes'><meta name='mobile-web-app-capable' content='yes'><meta name='apple-mobile-web-app-title' content='Mission Log'><meta name='apple-mobile-web-app-status-bar-style' content='default'></head><body><main><header class='mlog'><div><div class='label'>Mission log</div><h1>Midweek meetings</h1><div class='wk'>Pick a week. The page opens the current week on its own.</div></div></header><div id='installCard' class='card install' hidden><b>Use it like an app</b><p class='note'>Install Mission Log to open it from your home screen, even with no signal.</p><button id='installBtn' class='primary' type='button'>Install the app</button></div><div id='iosHelp' class='card install' hidden><b>Use it like an app</b><p class='note'>In Safari, tap the Share button, then <b>Add to Home Screen</b>. It then opens like an app and works with no signal.</p><p class='note'>The app keeps its own saved progress, separate from Safari. To bring yours along, open any week here in Safari, switch to <b>Full sheet</b> and tap <b>Save a backup</b> under Your weeks. Then do the same in the app, using <b>Restore from file</b>.</p></div><ul class='weeks'><li><a href='2026-11-11.html' data-id='2026-11-11-midweek' data-date='2026-11-11'><span class='d'>Wednesday, November 11</span><span class='w' lang='pt-BR'>9 a 15 de novembro · Jeremias 51 a 52</span><span class='c'></span></a></li><li><a href='2026-11-18.html' data-id='2026-11-18-midweek' data-date='2026-11-18'><span class='d'>Wednesday, November 18</span><span class='w' lang='pt-BR'>16 a 22 de novembro · Lamentações 1 a 2</span><span class='c'></span></a></li><li><a href='2026-11-25.html' data-id='2026-11-25-midweek' data-date='2026-11-25'><span class='d'>Wednesday, November 25</span><span class='w' lang='pt-BR'>23 a 29 de novembro · Lamentações 3 a 5</span><span class='c'></span></a></li><li><a href='2026-12-02.html' data-id='2026-12-02-midweek' data-date='2026-12-02'><span class='d'>Wednesday, December 2</span><span class='w' lang='pt-BR'>30 de novembro a 6 de dezembro · Ezequiel 1 a 2</span><span class='c'></span></a></li><li><a href='2026-12-09.html' data-id='2026-12-09-midweek' data-date='2026-12-09'><span class='d'>Wednesday, December 9</span><span class='w' lang='pt-BR'>7 a 13 de dezembro · Ezequiel 3 a 4</span><span class='c'></span></a></li><li><a href='2026-12-16.html' data-id='2026-12-16-midweek' data-date='2026-12-16'><span class='d'>Wednesday, December 16</span><span class='w' lang='pt-BR'>14 a 20 de dezembro · Ezequiel 5 a 6</span><span class='c'></span></a></li><li><a href='2026-12-23.html' data-id='2026-12-23-midweek' data-date='2026-12-23'><span class='d'>Wednesday, December 23</span><span class='w' lang='pt-BR'>21 a 27 de dezembro · Ezequiel 7 a 8</span><span class='c'></span></a></li><li><a href='2026-12-30.html' data-id='2026-12-30-midweek' data-date='2026-12-30'><span class='d'>Wednesday, December 30</span><span class='w' lang='pt-BR'>28 de dezembro a 3 de janeiro · Ezequiel 9 a 10</span><span class='c'></span></a></li></ul></main><script>
-const W = [{"date": "2026-11-11", "file": "2026-11-11.html", "id": "2026-11-11-midweek"}, {"date": "2026-11-18", "file": "2026-11-18.html", "id": "2026-11-18-midweek"}, {"date": "2026-11-25", "file": "2026-11-25.html", "id": "2026-11-25-midweek"}, {"date": "2026-12-02", "file": "2026-12-02.html", "id": "2026-12-02-midweek"}, {"date": "2026-12-09", "file": "2026-12-09.html", "id": "2026-12-09-midweek"}, {"date": "2026-12-16", "file": "2026-12-16.html", "id": "2026-12-16-midweek"}, {"date": "2026-12-23", "file": "2026-12-23.html", "id": "2026-12-23-midweek"}, {"date": "2026-12-30", "file": "2026-12-30.html", "id": "2026-12-30-midweek"}];
-const pad = n => String(n).padStart(2, '0');
-const t = new Date(), today = t.getFullYear() + '-' + pad(t.getMonth() + 1) + '-' + pad(t.getDate());
-const cur = W.find(w => w.date >= today) || W[W.length - 1];
-if (!location.search.includes('list')) location.replace(cur.file);
+</style><script>
+window.__analytics = true;
+(function () {
+  var off = false; try { off = localStorage.getItem('listening-tracker-v1:noCount') === '1'; } catch (e) {}
+  if (off) return;
+  var s = document.createElement('script'); s.async = true; s.src = 'https://gc.zgo.at/count.js';
+  s.setAttribute('data-goatcounter', 'https://rvarzea.goatcounter.com/count');
+  document.head.appendChild(s);
+  window.__track = function (name) {
+    if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({path: 'mission-log/' + name, title: 'Mission Log: ' + name, event: true});
+  };
+  var standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+  if (standalone) addEventListener('load', function () { setTimeout(function () { window.__track('opened-as-app'); }, 1500); });
+  addEventListener('appinstalled', function () { window.__track('app-installed'); });
+})();
+</script><link rel='manifest' href='manifest.webmanifest'><meta name='theme-color' content='#1b2b44'><link rel='apple-touch-icon' href='icons/apple-touch-icon.png'><meta name='apple-mobile-web-app-capable' content='yes'><meta name='mobile-web-app-capable' content='yes'><meta name='apple-mobile-web-app-title' content='Mission Log'><meta name='apple-mobile-web-app-status-bar-style' content='default'></head><body><main><header class='mlog'><div><div class='label'>Mission log</div><h1>Midweek meetings</h1><div class='wk'>Pick a week. The app opens the week of your next meeting on its own.</div></div></header><div id='installCard' class='card install' hidden><b>Use it like an app</b><p class='note'>Install Mission Log to open it from your home screen, even with no signal.</p><button id='installBtn' class='primary' type='button'>Install the app</button></div><div id='iosHelp' class='card install' hidden><b>Use it like an app</b><p class='note'>In Safari, tap the Share button, then <b>Add to Home Screen</b>. It then opens like an app and works with no signal.</p><p class='note'>The app keeps its own saved progress, separate from Safari. To bring yours along, open any week here in Safari, switch to <b>Full sheet</b> and tap <b>Save a backup</b> under Your weeks. Then do the same in the app, using <b>Restore from file</b>.</p></div><details class='card settings' id='settings'><summary><span id='setSummary'>Meeting day: <b id='dayName'>Wednesday</b></span></summary><p id='setAsk' class='ask' hidden>Which day is your midweek meeting?</p><label for='meetDay'>Your midweek meeting day</label><div class='row'><select id='meetDay'><option value='0'>Monday</option><option value='1'>Tuesday</option><option value='2' selected>Wednesday</option><option value='3'>Thursday</option><option value='4'>Friday</option><option value='5'>Saturday</option><option value='6'>Sunday</option></select><button id='setDone' class='primary' type='button'>Save</button></div><p class='note'>Dates follow this day, and the app opens on the week of your next meeting. Saved on this device.</p><div id='countRow' hidden><label class='check'><input type='checkbox' id='countMe' checked> Count my visits anonymously</label><p class='note'>Only page visits and which buttons get used are counted, with no names and no cookies. What you tick and type stays on this device. Changes apply the next time a page opens.</p></div></details><ul class='weeks'><li><a href='2026-11-11.html' data-id='2026-11-11-midweek' data-date='2026-11-11'><span class='d'><span data-monday='2026-11-09'>Wednesday, November 11</span></span><span class='w' lang='pt-BR'>9 a 15 de novembro · Jeremias 51 a 52</span><span class='c'></span></a></li><li><a href='2026-11-18.html' data-id='2026-11-18-midweek' data-date='2026-11-18'><span class='d'><span data-monday='2026-11-16'>Wednesday, November 18</span></span><span class='w' lang='pt-BR'>16 a 22 de novembro · Lamentações 1 a 2</span><span class='c'></span></a></li><li><a href='2026-11-25.html' data-id='2026-11-25-midweek' data-date='2026-11-25'><span class='d'><span data-monday='2026-11-23'>Wednesday, November 25</span></span><span class='w' lang='pt-BR'>23 a 29 de novembro · Lamentações 3 a 5</span><span class='c'></span></a></li><li><a href='2026-12-02.html' data-id='2026-12-02-midweek' data-date='2026-12-02'><span class='d'><span data-monday='2026-11-30'>Wednesday, December 2</span></span><span class='w' lang='pt-BR'>30 de novembro a 6 de dezembro · Ezequiel 1 a 2</span><span class='c'></span></a></li><li><a href='2026-12-09.html' data-id='2026-12-09-midweek' data-date='2026-12-09'><span class='d'><span data-monday='2026-12-07'>Wednesday, December 9</span></span><span class='w' lang='pt-BR'>7 a 13 de dezembro · Ezequiel 3 a 4</span><span class='c'></span></a></li><li><a href='2026-12-16.html' data-id='2026-12-16-midweek' data-date='2026-12-16'><span class='d'><span data-monday='2026-12-14'>Wednesday, December 16</span></span><span class='w' lang='pt-BR'>14 a 20 de dezembro · Ezequiel 5 a 6</span><span class='c'></span></a></li><li><a href='2026-12-23.html' data-id='2026-12-23-midweek' data-date='2026-12-23'><span class='d'><span data-monday='2026-12-21'>Wednesday, December 23</span></span><span class='w' lang='pt-BR'>21 a 27 de dezembro · Ezequiel 7 a 8</span><span class='c'></span></a></li><li><a href='2026-12-30.html' data-id='2026-12-30-midweek' data-date='2026-12-30'><span class='d'><span data-monday='2026-12-28'>Wednesday, December 30</span></span><span class='w' lang='pt-BR'>28 de dezembro a 3 de janeiro · Ezequiel 9 a 10</span><span class='c'></span></a></li></ul></main><script>
+const SKEY = 'listening-tracker-v1:settings';
+function savedDay() { try { const s = JSON.parse(localStorage.getItem(SKEY) || '{}'); return Number.isInteger(s.day) ? s.day : null; } catch (e) { return null; } }
+function storeDay(d) { try { localStorage.setItem(SKEY, JSON.stringify({day: d})); } catch (e) {} }
+const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], DEFAULT_DAY = 2;
+let meetDay = savedDay(); const daySet = meetDay !== null; if (!daySet) meetDay = DEFAULT_DAY;
+function meetDate(monday, day) { const [y, m, d] = monday.split('-').map(Number); return new Date(y, m - 1, d + day); }
+function isoDate(dt) { const p = n => String(n).padStart(2, '0'); return dt.getFullYear() + '-' + p(dt.getMonth() + 1) + '-' + p(dt.getDate()); }
+const fmt = {long: {weekday: 'long', month: 'long', day: 'numeric'}, short: {month: 'short', day: 'numeric'}, md: {month: 'long', day: 'numeric'}};
+function relabel() {
+  document.querySelectorAll('[data-monday]').forEach(el => {
+    el.textContent = meetDate(el.dataset.monday, meetDay).toLocaleDateString('en-US', fmt[el.dataset.fmt || 'long']);
+  });
+  const n = document.getElementById('dayName'); if (n) n.textContent = DAYS[meetDay];
+  const sel = document.getElementById('meetDay'); if (sel) sel.value = String(meetDay);
+}
+function setupSettings(onChange) {
+  const box = document.getElementById('settings'); if (!box) return;
+  if (!daySet) { box.open = true; document.getElementById('setAsk').hidden = false; }
+  const apply = () => { meetDay = +document.getElementById('meetDay').value; storeDay(meetDay); relabel(); if (onChange) onChange(); };
+  document.getElementById('meetDay').addEventListener('change', apply);
+  document.getElementById('setDone').addEventListener('click', () => {
+    apply(); box.open = false; document.getElementById('setAsk').hidden = true;
+    try { if (window.__track) window.__track('meeting-day-' + DAYS[meetDay].toLowerCase()); } catch (e) {}
+  });
+  const cm = document.getElementById('countMe');
+  if (window.__analytics && cm) {
+    document.getElementById('countRow').hidden = false;
+    try { cm.checked = localStorage.getItem('listening-tracker-v1:noCount') !== '1'; } catch (e) {}
+    cm.addEventListener('change', () => { try { localStorage.setItem('listening-tracker-v1:noCount', cm.checked ? '0' : '1'); } catch (e) {} });
+  }
+}
+relabel();
+
+const W = [{"monday": "2026-11-09", "file": "2026-11-11.html", "id": "2026-11-11-midweek"}, {"monday": "2026-11-16", "file": "2026-11-18.html", "id": "2026-11-18-midweek"}, {"monday": "2026-11-23", "file": "2026-11-25.html", "id": "2026-11-25-midweek"}, {"monday": "2026-11-30", "file": "2026-12-02.html", "id": "2026-12-02-midweek"}, {"monday": "2026-12-07", "file": "2026-12-09.html", "id": "2026-12-09-midweek"}, {"monday": "2026-12-14", "file": "2026-12-16.html", "id": "2026-12-16-midweek"}, {"monday": "2026-12-21", "file": "2026-12-23.html", "id": "2026-12-23-midweek"}, {"monday": "2026-12-28", "file": "2026-12-30.html", "id": "2026-12-30-midweek"}];
+// the current week is the one whose meeting (on the chosen day) is today or still ahead
+const today = isoDate(new Date());
+const current = () => W.find(w => isoDate(meetDate(w.monday, meetDay)) >= today) || W[W.length - 1];
+let cur = current();
+if (!location.search.includes('list') && !location.search.includes('settings') && daySet) location.replace(cur.file);
+const mark = () => { cur = current(); document.querySelectorAll('.weeks a').forEach(a => a.classList.toggle('now', a.dataset.id === cur.id)); };
+setupSettings(mark);
+mark();
+// first visit: once the day is saved, go straight to that week
+document.getElementById('setDone').addEventListener('click', () => {
+  if (!location.search.includes('list') && !location.search.includes('settings')) location.replace(current().file);
+});
 let saved = {};
 try { saved = (JSON.parse(localStorage.getItem('listening-tracker-v1') || '{}').weeks) || {}; } catch (e) {}
 document.querySelectorAll('.weeks a').forEach(a => {
   const w = saved[a.dataset.id];
   if (w && w.caught) a.querySelector('.c').textContent = w.caught + ' found';
-  if (a.dataset.id === cur.id) a.classList.add('now');
 });
 // install help: Chrome/Android offers a prompt; iPhone/iPad need Share > Add to Home Screen
 const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;

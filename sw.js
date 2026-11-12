@@ -1,5 +1,5 @@
 // Mission Log service worker. VERSION changes whenever any page changes.
-const VERSION = '858ad1afc663';
+const VERSION = '0193d523e876';
 const CACHE = 'mission-log-' + VERSION;
 const FILES = ["./", "2026-11-11.html", "2026-11-18.html", "2026-11-25.html", "2026-12-02.html", "2026-12-09.html", "2026-12-16.html", "2026-12-23.html", "2026-12-30.html", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png", "icons/apple-touch-icon.png"];
 
